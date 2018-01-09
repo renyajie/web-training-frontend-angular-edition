@@ -1,26 +1,119 @@
 <div class="go-center">
   <h3>Angular和SSM整合基础测试</h3>
   <ul>
-    <li *ngFor="let tip of tips"><strong>{{tip}}</strong></li>
+    <li *ngFor="let tip of tips">
+      <strong>{{tip}}</strong>
+    </li>
   </ul>
 </div>
 
-<h3><strong>GET: 简单的请求信息</strong></h3>
+<h3>
+  <strong>GET: 时间测试</strong>
+</h3>
+<button (click)="testTime()">Time Test</button>
+{{timeString}}
+
+<h3>
+  <strong>GET: 简单的请求信息</strong>
+</h3>
 <button (click)="getSimpleMessage()">Get one</button>
 {{messages[0]}}
 
-<h3><strong>GET: 带有参数的请求信息</strong></h3>
+<h3>
+  <strong>GET: 带有参数的请求信息</strong>
+</h3>
 <button (click)="getSimpleMessageWithParams()">Get two</button>
 {{messages[1]}}
 
-<h3><strong>GET: 请求一个对象</strong></h3>
+<h3>
+  <strong>GET: 请求一个对象</strong>
+</h3>
 <button (click)="getSimpleObject()">Get three</button>
 {{messages[2]}}
 
-<h3><strong>GET: 请求一组对象</strong></h3>
+<h3>
+  <strong>GET: 请求一组对象</strong>
+</h3>
 <button (click)="getObjectList()">Get four</button>
 {{messages[3]}}
 
-<h3><strong>POST: 提交信息</strong></h3>
+<h3>
+  <strong>POST: 提交信息</strong>
+</h3>
 <button (click)="postMessage()">Post one</button>
 {{messages[4]}}
+
+<h3>
+  <strong>POST: 提交信息 Form表单</strong>
+</h3>
+<div class="left">
+  <div [hidden]="submitted">
+    <!-- 通过Angular获取form控件的引用，以便对表单进行控制 -->
+    <form (ngSubmit)="onSubmit()" #newsForm="ngForm">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" required [(ngModel)]="model.title" name="title" #title="ngModel">
+        <!-- 全靠name引用来控制表单控件 -->
+        <div [hidden]="title.valid || title.pristine" class="alert alert-danger">
+          Title is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="publisherId">PublisherId</label>
+        <input type="text" class="form-control" id="publisherId" required [(ngModel)]="model.publisherId" name="publisherId" #publisherId="ngModel">
+        <div [hidden]="publisherId.valid || publisherId.pristine" class="alert alert-danger">
+          Email is required
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-success" [disabled]="!newsForm.form.valid">Submit</button>
+      <!-- reset()方法让表单里的所有控件的状态都恢复成初始值 -->
+      <button type="button" class="btn btn-default" (click)="newNews(); newsForm.reset()">New News</button>
+    </form>
+  </div>
+
+  <div [hidden]="!submitted">
+    <h2>You submitted the following:</h2>
+    <div class="row">
+      <div class="col-xs-3">Name</div>
+      <div class="col-xs-9  pull-left">{{ model.title }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">PublisherId</div>
+      <div class="col-xs-9 pull-left">{{ model.publisherId }}</div>
+    </div>
+    <br>
+    <button class="btn btn-primary" (click)="submitted=false;">Edit</button>
+    <button class="btn btn-primary" (click)="postForm(); newNews(); newsForm.reset(); submitted=false; ">Confirm</button>
+  </div>
+</div>
+{{messages[5]}}
+
+<h3>
+  <strong>DELETE: 提交信息</strong>
+</h3>
+<input #delete>
+<button (click)="deleteMessage(delete.value)">Delete one</button>
+{{messages[6]}}
+
+<h3>
+  <strong>PUT: 提交信息</strong>
+</h3>
+<input #put>
+<button (click)="putMessage(put.value)">Put one</button>
+{{messages[7]}}
+
+
+<h3>
+  <strong>文件上传</strong>
+</h3>
+<input type="file" ng2FileSelect [uploader]="uploader" />
+<button type="button" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+  Upload all
+</button>
+
+<h3>
+  <strong>文件下载</strong>
+</h3>
+<a href="api/test/upload/download?fileName=烦烦烦.docx">文件下载</a>

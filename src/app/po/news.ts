@@ -1,10 +1,12 @@
 export class News {
     constructor(
         public id: number,
-        public publishDate: Date,
+        public publishDate: String,
         public title: string,
         public path: string,
-        public browTime?: number, ) {}
+        public publisherId: number,
+        public browTime?: number
+    ) {}
 
     static fromJSON(json: any): News {
         const news = Object.create(News.prototype);
@@ -19,7 +21,8 @@ export class News {
             publishDate: ${this.publishDate},
             title: ${this.title},
             path: ${this.path},
-            browTime: ${this.browTime}
+            browTime: ${this.browTime},
+            publisherId: ${this.publisherId}
         }`;
     }
 }
