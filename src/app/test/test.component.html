@@ -9,3 +9,18 @@
 <button (click)="getSimpleMessage()">Get one</button>
 {{messages[0]}}
 
+<h3><strong>GET: 带有参数的请求信息</strong></h3>
+<button (click)="getSimpleMessageWithParams()">Get two</button>
+{{messages[1]}}
+
+<h3><strong>GET: 请求一个对象</strong></h3>
+<button (click)="getSimpleObject()">Get three</button>
+{{messages[2]}}
+
+<h3><strong>GET: 请求一组对象</strong></h3>
+<button (click)="getObjectList()">Get four</button>
+{{messages[3]}}
+
+<h3><strong>POST: 提交信息</strong></h3>
+<button (click)="postMessage()">Post one</button>
+{{messages[4]}}
