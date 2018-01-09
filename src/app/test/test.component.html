@@ -1,0 +1,11 @@
+<div class="go-center">
+  <h3>Angular和SSM整合基础测试</h3>
+  <ul>
+    <li *ngFor="let tip of tips"><strong>{{tip}}</strong></li>
+  </ul>
+</div>
+
+<h3><strong>GET: 简单的请求信息</strong></h3>
+<button (click)="getSimpleMessage()">Get one</button>
+{{messages[0]}}
+
