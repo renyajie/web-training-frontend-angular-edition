@@ -150,10 +150,6 @@ export class TestComponent implements OnInit {
       'description': '233'
     }
   });
-
-  download() {
-    const testUrl = this.url + `upload/download?fileName=烦烦烦.docx`;
-    this.httpClient.get(testUrl, {responseType: "arraybuffer"}).subscribe();
-  }
+  
 }
 

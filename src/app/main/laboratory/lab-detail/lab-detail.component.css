@@ -1,0 +1,42 @@
+
+.main-content>div:first-child img{
+    width:258px;
+    height:200px;
+    margin:5px auto;
+}
+
+.main-content {
+    padding: 15px;
+}
+
+.main-content>div:first-child{ 
+    text-align:center;
+    margin-top: 30px;
+}
+
+.main-content>div:first-child>div{
+    width:300px;
+    padding: 5px;
+    margin: 5px auto;
+    font-size: 13pt;
+    text-align: left;
+}
+
+.main-content>div:nth-child(2) {
+    width:700px; 
+    margin:20px auto; 
+    border:1px solid #a8a8a8;;
+}
+
+.main-content p{
+    text-indent:2em;
+    padding: 20px;
+}
+
+/*按钮*/
+.main-btn{
+    position:fixed; 
+    bottom:20px; 
+    right:150px; 
+    z-index:100;
+}

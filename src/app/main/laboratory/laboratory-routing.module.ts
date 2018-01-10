@@ -4,7 +4,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { LaboratoryComponent } from './laboratory.component';
 
 const labRoutes: Routes = [
-  { path: '', component: LaboratoryComponent }
+  { 
+    path: '', 
+    component: LaboratoryComponent,
+    children: [
+      { path: 'list', loadChildren: 'app/main/laboratory/lab-list/lab-list.module#LabListModule'},
+      { path: 'insert', loadChildren: 'app/main/laboratory/lab-insert/lab-insert.module#LabInsertModule'},
+      { path: '', redirectTo: 'list', pathMatch: 'full' }
+    ]
+  }
 ];
 
 @NgModule({

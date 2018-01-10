@@ -1,0 +1,58 @@
+
+.main-content{
+    height: 85%;
+    margin-left: 80px;
+    padding-top:  8%;
+}
+
+.foot-content{
+    height: 15%;
+    margin-left: 80px;
+}
+
+.labInfo{
+    width:250px;
+    padding: 10px;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #a8a8a8;
+}
+
+.labImg{
+    text-align: center;
+}
+
+.labInfo>div:first-child img{
+    width: 100px;
+    height: 80px;
+}
+
+.labTxt{
+    padding: 5px;
+    margin-top: 10px;
+}
+
+.labTxt p{
+    text-indent: 2em;
+}
+
+.labBtn{
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.main-btn{
+    margin: 20px 0 0 40px;
+}
+
+.main-btn>button:first-child{
+    margin-right: 15px;
+}
+
+.main-page{
+
+}
+
+.pagination a{
+    color: darkgray;
+}
