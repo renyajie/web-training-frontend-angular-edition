@@ -13,14 +13,25 @@ export class LabService {
    * @param pageNumber 第几页 
    * @param labName 实验室名称模糊搜索
    */
-  getAllLab(pageNumber?, labName?){
-    const params = new HttpParams();
-    if(pageNumber != null) {
-       params.set('pn', pageNumber);
+  getAllLab(pageNumber?: string, labName?:string){
+    let params: HttpParams;
+    if(pageNumber != null && labName != null) {
+      params = new HttpParams()
+      .set('pn', pageNumber)
+      .set('labName', labName);
     }
-    if(labName != null){
-      params.set('labName', labName);
+    if(pageNumber != null && labName == null) {
+      params = new HttpParams()
+      .set('pn', pageNumber);
     }
+    if(pageNumber == null && labName != null) {
+      params = new HttpParams()
+      .set('labName', labName);;
+    }
+    if(pageNumber == null && labName == null) {
+      params = new HttpParams();
+    }
+    console.log(`pageNumber is ${pageNumber}, labName is ${labName}`);
     const testUrl = this.url + 'getAll';
     return this.httpClient.get(testUrl, {params});
   }

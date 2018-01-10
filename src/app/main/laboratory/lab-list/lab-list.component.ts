@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 import { LabService } from '../../../core/lab.service';
 import { Laboratory } from '../../../po/laboratory';
+import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/map';
+import { of } from 'rxjs/observable/of';
 
 @Component({
   selector: 'app-lab-list',
@@ -12,8 +14,8 @@ import 'rxjs/add/operator/map';
 })
 export class LabListComponent implements OnInit {
 
-  pageInfo = null;
-  labs: Laboratory[] = [];
+  pageInfo$: Observable<any>;
+  labs$: Observable<Laboratory[]>;
 
   constructor(private labService: LabService) { }
 
@@ -30,15 +32,16 @@ export class LabListComponent implements OnInit {
    * @param labName 实验室名称
    */
   getAllLab(pageNumber?, labName?){
+    const labs: Laboratory[] = [];
     this.labService.getAllLab(pageNumber, labName).subscribe(
       data => {
         //若成功返回数据，为元素赋值
         if(data['code'] == 100){
           data['extend']['pageInfo']['list'].map(lab => {
-            this.labs.push(Laboratory.fromJSON(lab));
+            labs.push(Laboratory.fromJSON(lab));
           });
-          this.pageInfo = data['extend']['pageInfo'];
-          console.log(this.pageInfo);
+          this.labs$ = of(labs);
+          this.pageInfo$ = of(data['extend']['pageInfo']);
         }
         //若发生错误
         else{

@@ -1,6 +1,6 @@
 <div class="row main-content">
   <!--一个实验室-->
-  <div class="col-md-3 labInfo" *ngFor="let lab of labs">
+  <div class="col-md-3 labInfo" *ngFor="let lab of labs$ | async">
     <div class="labImg">
       <img src={{lab.imgPath}}>
     </div>
@@ -23,14 +23,14 @@ Todo: put this in to website
   <div class="col-md-6 col-md-offset-3">
     <div class="main-page">
       <nav aria-label="Page navigation">
-        <ul class="pagination">
+        <ul class="pagination" *ngIf="pageInfo$ | async as pageInfo">
           <!-- 如果存在上一页 -->
-          <li *ngIf="pageInfo.hasPreviousPage" class="active" (click)="getAllLab(pageInfo.pageNum - 1, labName.value)">
+          <li *ngIf="pageInfo.hasPreviousPage" (click)="getAllLab(pageInfo.pageNum - 1, labName.value)">
             <a>
               首页
             </a>
           </li>
-          <li *ngIf="pageInfo.hasPreviousPage" class="active" (click)="getAllLab(pageInfo.pageNum - 1, labName.value)">
+          <li *ngIf="pageInfo.hasPreviousPage" (click)="getAllLab(pageInfo.pageNum - 1, labName.value)">
             <span>
               <span aria-hidden="true">&laquo;</span>
             </span>
@@ -46,18 +46,17 @@ Todo: put this in to website
               <span aria-hidden="true">&laquo;</span>
             </span>
           </li>
-          <!-- 定义中间页
-          <li *ngFor="let lab of labs">
-            <a href="#">1</a>
+          <!-- 定义中间页 -->
+          <li *ngFor="let item of pageInfo.navigatepageNums" [class.active]="pageInfo.pageNum === item" (click)="getAllLab(item, labName.value)">
+            <a>{{item}}</a>
           </li>
-           -->
           <!-- 如果存在下一页 -->
-          <li *ngIf="pageInfo.hasNextPage" class="active" (click)="getAllLab(pageInfo.pageNum + 1, labName.value)">
+          <li *ngIf="pageInfo.hasNextPage" (click)="getAllLab(pageInfo.pageNum + 1, labName.value)">
             <a aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
             </a>
           </li>
-          <li *ngIf="pageInfo.hasNextPage" class="active" (click)="getAllLab(pageInfo.pages, labName.value)">
+          <li *ngIf="pageInfo.hasNextPage" (click)="getAllLab(pageInfo.pages, labName.value)">
             <a>
               末页
             </a>
