@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
+import { LabService } from '../../../core/lab.service';
+import { Laboratory } from '../../../po/laboratory';
+
+import 'rxjs/add/operator/map';
+
 @Component({
   selector: 'app-lab-list',
   templateUrl: './lab-list.component.html',
@@ -7,9 +12,47 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LabListComponent implements OnInit {
 
-  constructor() { }
+  pageInfo = null;
+  labs: Laboratory[] = [];
 
+  constructor(private labService: LabService) { }
+
+  /**
+   * 进入页面时先请求数据
+   */
   ngOnInit() {
+    this.getAllLab();
   }
 
+  /**
+   * 请求实验室列表信息
+   * @param pageNumber 页数
+   * @param labName 实验室名称
+   */
+  getAllLab(pageNumber?, labName?){
+    this.labService.getAllLab(pageNumber, labName).subscribe(
+      data => {
+        //若成功返回数据，为元素赋值
+        if(data['code'] == 100){
+          data['extend']['pageInfo']['list'].map(lab => {
+            this.labs.push(Laboratory.fromJSON(lab));
+          });
+          this.pageInfo = data['extend']['pageInfo'];
+          console.log(this.pageInfo);
+        }
+        //若发生错误
+        else{
+          alert("服务器响应错误")
+        }
+      }
+    )
+  }
+
+  /**
+   * 查看实验室详情
+   * @param id 实验室编号
+   */
+  seeDetail(id: number){
+
+  }
 }

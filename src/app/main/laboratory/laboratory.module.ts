@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 
 import { LaboratoryRoutingModule } from './laboratory-routing.module';
 
+import { LabService } from '../../core/lab.service';
+
 import { LaboratoryComponent } from './laboratory.component';
 
 @NgModule({
@@ -14,6 +16,9 @@ import { LaboratoryComponent } from './laboratory.component';
   ],
   declarations: [
     LaboratoryComponent
+  ],
+  providers: [
+    LabService
   ]
 })
 export class LaboratoryModule { }
