@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router'
 
 import { LabService } from '../../../core/lab.service';
 import { Laboratory } from '../../../po/laboratory';
@@ -17,7 +18,9 @@ export class LabListComponent implements OnInit {
   pageInfo$: Observable<any>;
   labs$: Observable<Laboratory[]>;
 
-  constructor(private labService: LabService) { }
+  constructor(
+    private labService: LabService,
+    private router: Router) { }
 
   /**
    * 进入页面时先请求数据
@@ -49,6 +52,13 @@ export class LabListComponent implements OnInit {
         }
       }
     )
+  }
+
+  /**
+   * 路由到服务新增页面
+   */
+  goToInsert(){
+    this.router.navigate(['main/lab/insert']);
   }
 
 }

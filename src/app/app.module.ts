@@ -10,7 +10,6 @@ import { TestModule } from './test/test.module';
 import { PersonInfoService } from './core/person-info.service';
 
 import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router/src/router_module';
 
 @NgModule({
   declarations: [
