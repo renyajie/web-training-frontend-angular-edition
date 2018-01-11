@@ -1,3 +1,33 @@
-<p>
-  lab-insert works!
-</p>
+<h3>新增实验室信息</h3>
+TODO {{diagnostic}}
+<div class="main-cont">
+  <div class="form-group">
+    <label for="labName" class="LaboratoryInsert-label">实验室名称</label>
+    <input type="text" [(ngModel)]="lab.labName" class="LaboratoryInsert-input" id="labName" placeholder="实验室名称">
+  </div>
+
+  <div class="form-group">
+    <label for="teacherId" class="LaboratoryInsert-label">负责教师编号</label>
+    <input type="text" [(ngModel)]="lab.teacherId" class="LaboratoryInsert-input" id="teacherId" placeholder="负责教师编号">
+  </div>
+
+  <div class="form-group">
+    <label for="location" class="LaboratoryInsert-label">实验室地址</label>
+    <input type="text" [(ngModel)]="lab.location" class="LaboratoryInsert-input" id="location" placeholder="实验室地址">
+  </div>
+
+  <div class="form-group">
+    <label for="brief" class="LaboratoryInsert-label">实验室简介</label>
+    <textarea type="text" [(ngModel)]="lab.brief" class="LaboratoryInsert-text" id="brief" placeholder="实验室简介"></textarea>
+  </div>
+
+  <div class="form-group">
+      <!-- 设置只能选择jpg -->
+      实验室图片(jpg): <input type="file" ng2FileSelect [uploader]="uploader" id="imgUpload" accept="image/jpeg"/>
+  </div>
+
+</div>
+<div class="main-btn">
+  <button type="button" class="btn btn-primary btn-s" (click)="submitData()">提交</button>
+  <button type="button" class="btn btn-primary btn-s" (click)="goToList()">返回</button>
+</div>

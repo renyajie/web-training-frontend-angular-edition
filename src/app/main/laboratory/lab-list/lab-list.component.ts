@@ -51,11 +51,4 @@ export class LabListComponent implements OnInit {
     )
   }
 
-  /**
-   * 查看实验室详情
-   * @param id 实验室编号
-   */
-  seeDetail(id: number){
-
-  }
 }

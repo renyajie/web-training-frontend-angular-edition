@@ -9,6 +9,14 @@
     padding: 15px;
 }
 
+.left{
+    float: left;
+}
+
+.right{
+    float: right;
+}
+
 .main-content>div:first-child{ 
     text-align:center;
     margin-top: 30px;
@@ -23,7 +31,7 @@
 }
 
 .main-content>div:nth-child(2) {
-    width:700px; 
+    width:850px; 
     margin:20px auto; 
     border:1px solid #a8a8a8;;
 }
@@ -31,12 +39,4 @@
 .main-content p{
     text-indent:2em;
     padding: 20px;
-}
-
-/*按钮*/
-.main-btn{
-    position:fixed; 
-    bottom:20px; 
-    right:150px; 
-    z-index:100;
 }

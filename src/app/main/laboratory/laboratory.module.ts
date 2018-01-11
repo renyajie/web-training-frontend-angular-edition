@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { LaboratoryRoutingModule } from './laboratory-routing.module';
 
@@ -12,6 +13,7 @@ import { LaboratoryComponent } from './laboratory.component';
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule,
     LaboratoryRoutingModule
   ],
   declarations: [

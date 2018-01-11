@@ -5,7 +5,8 @@ export class Laboratory {
         public teacherId: number,
         public location: string,
         public imgPath: string,
-        public brief: string
+        public brief: string,
+        public teacherName: string
     ) {}
 
     static fromJSON(json: any): Laboratory {
@@ -22,7 +23,8 @@ export class Laboratory {
             teacherId: ${this.teacherId},
             location: ${this.location},
             imgPath: ${this.imgPath},
-            brief: ${this.brief}
+            brief: ${this.brief},
+            teacherName: ${this.teacherName}
         }`;
     }
 }
