@@ -19,7 +19,7 @@
 }
 
 .list li {
-    margin: 5px;
+    margin: 2px;
 }
 
 .list li span{
@@ -29,6 +29,7 @@
 .main-page{
     position: fixed;
     right: 100px;
+    bottom: 0px;
 }
 
 .pagination a{

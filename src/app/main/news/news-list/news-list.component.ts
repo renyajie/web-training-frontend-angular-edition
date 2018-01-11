@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { DatepickerModule } from 'ngx-bootstrap';
+import { Observable } from 'rxjs/Observable';
+
+import 'rxjs/add/operator/map';
+import { of } from 'rxjs/observable/of';
 
 import { NewsService } from '../../../core/news.service';
 
 import { DateFormat } from '../../../utility/date-format';
+import { News } from '../../../po/news';
+
 
 @Component({
   selector: 'app-news-list',
@@ -11,6 +17,9 @@ import { DateFormat } from '../../../utility/date-format';
   styleUrls: ['./news-list.component.css']
 })
 export class NewsListComponent implements OnInit {
+
+  pageInfo$: Observable<any>;
+  newses$: Observable<News[]>;
 
   //日期选择框文本
   beforeBtnText = '选择最早日期';
@@ -29,7 +38,7 @@ export class NewsListComponent implements OnInit {
   maxDate: Date;
   minDate: Date;
 
-  constructor(private newsService: NewsService) { 
+  constructor(private newsService: NewsService) {
     //用到的参数一定要初始化，你无法预知你会什么时候调用它。
     this.beforeDate = new Date();
     this.afterDate = new Date();
@@ -41,35 +50,38 @@ export class NewsListComponent implements OnInit {
     this.minDate.setDate(this.current.getDate() - 3 * 365);
   }
 
+  /**
+   * 启动时向服务器请求无条件查询数据
+   */
   ngOnInit() {
-
+    this.getAllNews();
   }
 
-  showBeforePicker(event: any){
-    if(this.firstChooseForBeforeDate) {
+  showBeforePicker(event: any) {
+    if (this.firstChooseForBeforeDate) {
       this.firstChooseForBeforeDate = false;
     }
     this.showBeforeDate = !this.showBeforeDate;
     this.beforeBtnText = this.showBeforeDate ? '完成日期选择' : '选择最早日期';
   }
 
-  showAfterPicker(event: any){
-    if(this.firstChooseForAfterDate) {
+  showAfterPicker(event: any) {
+    if (this.firstChooseForAfterDate) {
       this.firstChooseForAfterDate = false;
     }
     this.showAfterDate = !this.showAfterDate;
     this.afterBtnText = this.showAfterDate ? '完成日期选择' : '选择最晚日期';
   }
 
-  get beforeDateText(){
-    if(this.firstChooseForBeforeDate) {
+  get beforeDateText() {
+    if (this.firstChooseForBeforeDate) {
       return '未选择最早日期';
     }
     return DateFormat.formatWithDay(this.beforeDate);
   }
 
-  get afterDateText(){
-    if(this.firstChooseForAfterDate) {
+  get afterDateText() {
+    if (this.firstChooseForAfterDate) {
       return '未选择最晚日期';
     }
     return DateFormat.formatWithDay(this.afterDate);
@@ -78,7 +90,7 @@ export class NewsListComponent implements OnInit {
   /**
    * 清空选择输入框样式，重置字段
    */
-  clear(){
+  clear() {
     this.firstChooseForAfterDate = true;
     this.firstChooseForBeforeDate = true;
     this.afterDate = new Date();
@@ -88,16 +100,32 @@ export class NewsListComponent implements OnInit {
   /**
    * 根据条件进行搜索
    */
-  search(pn?, newsName?){
+  getAllNews(pn?, newsName?) {
     //判断日期选择的合理性
-    if(this.beforeDate.getDate() > this.afterDate.getDate()) {
+    if (this.beforeDate.getDate() > this.afterDate.getDate()) {
       alert("最早日期不能晚于最迟日期，请重新选择");
       this.clear();
     }
     //发出搜索，并展示结果 TODO
+    const newses: News[] = [];
     this.newsService.getAllNews(
-      pn, newsName, 
+      pn, newsName,
       this.firstChooseForBeforeDate ? null : DateFormat.format(this.beforeDate),
-      this.firstChooseForAfterDate ? null : DateFormat.format(this.afterDate));
+      this.firstChooseForAfterDate ? null : DateFormat.format(this.afterDate)).subscribe(
+      data => {
+        //若成功返回数据，为元素赋值
+        if (data['code'] === 100) {
+          data['extend']['pageInfo']['list'].map(news => {
+            newses.push(News.fromJSON(news));
+          });
+          this.newses$ = of(newses);
+          this.pageInfo$ = of(data['extend']['pageInfo'])
+        }
+        //若发生错误
+        else {
+          alert("服务器响应错误")
+        }
+      }
+      );
   }
 }
