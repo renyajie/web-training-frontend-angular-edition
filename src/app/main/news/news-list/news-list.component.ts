@@ -37,6 +37,7 @@ export class NewsListComponent implements OnInit {
   current: Date;
   maxDate: Date;
   minDate: Date;
+  title: string = '';
 
   constructor(private newsService: NewsService) {
     //用到的参数一定要初始化，你无法预知你会什么时候调用它。
@@ -95,6 +96,7 @@ export class NewsListComponent implements OnInit {
     this.firstChooseForBeforeDate = true;
     this.afterDate = new Date();
     this.beforeDate = new Date();
+    this.title = '';
   }
 
   /**
@@ -102,16 +104,18 @@ export class NewsListComponent implements OnInit {
    */
   getAllNews(pn?, newsName?) {
     //判断日期选择的合理性
-    if (this.beforeDate.getDate() > this.afterDate.getDate()) {
-      alert("最早日期不能晚于最迟日期，请重新选择");
-      this.clear();
+    if(!this.firstChooseForBeforeDate && !this.firstChooseForAfterDate) {
+      if (this.beforeDate.getDate() > this.afterDate.getDate()) {
+        alert("最早日期不能晚于最迟日期，请重新选择");
+        this.clear();
+      }
     }
     //发出搜索，并展示结果 TODO
     const newses: News[] = [];
     this.newsService.getAllNews(
       pn, newsName,
-      this.firstChooseForBeforeDate ? null : DateFormat.format(this.beforeDate),
-      this.firstChooseForAfterDate ? null : DateFormat.format(this.afterDate)).subscribe(
+      this.firstChooseForBeforeDate ? null : DateFormat.formatWithDay(this.beforeDate),
+      this.firstChooseForAfterDate ? null : DateFormat.formatWithDay(this.afterDate)).subscribe(
       data => {
         //若成功返回数据，为元素赋值
         if (data['code'] === 100) {

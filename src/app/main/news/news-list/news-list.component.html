@@ -15,11 +15,11 @@
     </div>
     <div class="col-md-3">
         标题模糊：
-        <input #newsName>
+        <input #newsName [(ngModel)]="title">
     </div>
     <div class="col-md-3">
-        <button type="button" class="btn btn-info btn-sm" (click)="clear()">清空</button>
-        <button type="button" class="btn btn-info btn-sm" (click)="getAllNews(1, newsName.value)">搜索</button>
+        <button type="button" class="btn btn-info btn-sm" (click)="clear();getAllNews()">清空</button>
+        <button type="button" class="btn btn-info btn-sm" (click)="getAllNews(1, title)">搜索</button>
     </div>
 </div>
 
