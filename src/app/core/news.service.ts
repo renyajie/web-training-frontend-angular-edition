@@ -9,7 +9,20 @@ export class NewsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllNews(title?, before?, after?){
+  /**
+   * 多条件查询新闻列表
+   * @param title 新闻标题
+   * @param before 大于等于此日期
+   * @param after 小于等于此日期
+   */
+  getAllNews(pn?: string, title?: string, before?: string, after?: string){
+    const params = new HttpParams()
+    .set('pn', pn ? pn : '')
+    .set('title', title ? title : '')
+    .set('before', before ? before : '')
+    .set('after', after ? after : '');
+    const testUrl = this.url + 'getAll';
+    return this.httpClient.get(testUrl, { params });
   }
 
   /**

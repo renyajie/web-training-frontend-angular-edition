@@ -1,12 +1,14 @@
-import { modelGroupProvider } from "@angular/forms/src/directives/ng_model_group";
-
-export class DateFormat {
+export class DateFormat extends Date{
 
     static dayInMonth = [
         [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31], 
         [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     ];
 
+    /**
+     * 获取yyyy-MM-dd hh:mm格式的日期
+     * @param date 日期
+     */
     static format(date: Date) {
         let result = '';
         //先获取UTC时间
@@ -33,5 +35,14 @@ export class DateFormat {
         //拼接结果
         result = year + '-' + (month + 1) + '-' + day + ' ' + hour + ':' + minute;
         return result;
+    }
+
+    /**
+     * 获得yyyy-MM-dd格式的日期
+     * @param date 日期
+     */
+    static formatWithDay(date: Date){
+        let result = DateFormat.format(date);
+        return result.substring(0, result.indexOf(' '));
     }
 }

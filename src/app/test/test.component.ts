@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { FileUploader } from 'ng2-file-upload';
 import 'rxjs/add/operator/map';
+import { DatepickerModule } from 'ngx-bootstrap';
 
 import { DateFormat } from '../utility/date-format';
 import { News } from '../po/news';
@@ -22,6 +23,8 @@ export class TestComponent implements OnInit {
   submitted = false;
   timeString = '';
   messages: string[] = [];
+  date: Date = new Date();
+  showDatePicker = true;
 
   constructor(private httpClient: HttpClient) {
     for (let i = 0; i < 9; i++) {
@@ -31,6 +34,8 @@ export class TestComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  get diagnostic() { return JSON.stringify(DateFormat.formatWithDay(this.date)) }
 
   testTime() {
     this.timeString = DateFormat.format(new Date());
@@ -151,7 +156,9 @@ export class TestComponent implements OnInit {
     }
   });
 
-  
+  showOrHideDatepicker(){
+    this.showDatePicker = !this.showDatePicker;
+  }
   
 }
 

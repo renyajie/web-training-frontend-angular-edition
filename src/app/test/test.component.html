@@ -122,3 +122,10 @@
   <strong>显示图片</strong>
 </h3>
 <img src="api/upload/image/1.jpg">
+
+<h3>
+  <strong>日期测试</strong>
+</h3>
+TODO: {{diagnostic}}
+<button type="button" (click)="showOrHideDatepicker()">隐藏或显示日期选择框</button>
+<datepicker *ngIf="showDatePicker" [(ngModel)]="date" [showWeeks]="true" [onlyCurrentMonth]=true></datepicker>

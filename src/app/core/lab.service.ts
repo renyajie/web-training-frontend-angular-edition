@@ -18,23 +18,9 @@ export class LabService {
    * @returns 服务器返回的数据
    */
   getAllLab(pageNumber?: string, labName?: string) {
-    let params: HttpParams;
-    if (pageNumber != null && labName != null) {
-      params = new HttpParams()
-        .set('pn', pageNumber)
-        .set('labName', labName);
-    }
-    if (pageNumber != null && labName == null) {
-      params = new HttpParams()
-        .set('pn', pageNumber);
-    }
-    if (pageNumber == null && labName != null) {
-      params = new HttpParams()
-        .set('labName', labName);;
-    }
-    if (pageNumber == null && labName == null) {
-      params = new HttpParams();
-    }
+    let params = new HttpParams()
+      .set('pn', pageNumber ? pageNumber : '')
+      .set('labName', labName ? labName : '');
     console.log(`pageNumber is ${pageNumber}, labName is ${labName}`);
     const testUrl = this.url + 'getAll';
     return this.httpClient.get(testUrl, { params });
