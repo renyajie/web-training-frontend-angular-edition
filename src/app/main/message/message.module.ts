@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 
 import { MessageRoutingModule } from './message-routing.module';
 
+import { MsgService } from '../../core/msg.service';
+
 import { MessageComponent } from './message.component';
 
 @NgModule({
@@ -14,6 +16,9 @@ import { MessageComponent } from './message.component';
   ],
   declarations: [
     MessageComponent
+  ],
+  providers: [
+    MsgService
   ]
 })
 export class MessageModule { }

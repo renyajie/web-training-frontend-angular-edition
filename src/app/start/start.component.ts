@@ -12,6 +12,7 @@ import { Teacher } from '../po/teacher';
 })
 export class StartComponent implements OnInit {
 
+  //判断用户选择的登录身份
   isStudent: number;
   account: string;
   passwd: string;
@@ -45,8 +46,9 @@ export class StartComponent implements OnInit {
       this.loginService.studentLogin({ stuId: +this.account, passwd: this.passwd } as Student)
       .subscribe(
         data => {
-          //若登陆成功，保存信息，并跳转主页面
+          //若登陆成功，保存身份信息，并跳转主页面
           if(data['code'] == 100) {
+            this.personInfoService.isStudent = true;
             this.personInfoService.student = Student.fromJSON(data['extend']['info']);
             console.log(this.personInfoService.student);
             this.router.navigate(['main']);
@@ -61,8 +63,9 @@ export class StartComponent implements OnInit {
       this.loginService.teacherLogin({ teacherId: +this.account, passwd: this.passwd } as Teacher)
       .subscribe(
         data => {
-          //若登陆成功，保存信息，并跳转主页面
+          //若登陆成功，保存身份信息，并跳转主页面
           if(data['code'] == 100) {
+            this.personInfoService.isStudent = false;
             this.personInfoService.teacher = Teacher.fromJSON(data['extend']['info']);
             console.log(this.personInfoService.teacher);
             this.router.navigate(['main']);

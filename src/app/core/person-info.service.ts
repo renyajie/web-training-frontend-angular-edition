@@ -5,12 +5,17 @@ import { Teacher } from '../po/teacher';
 @Injectable()
 export class PersonInfoService {
 
+  //记录进入系统的用户信息
   private _isStudent: boolean;
   private _account: number;
   private _student: Student;
   private _teacher: Teacher;
 
-  constructor() { }
+  constructor() { 
+    //TODO: 测试信息，测试教师编号为1的用户
+    this.account = 1;
+    this.isStudent = false;
+  }
 
   set account(account: number) {
     this._account = account;

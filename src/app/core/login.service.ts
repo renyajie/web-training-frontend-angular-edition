@@ -3,7 +3,6 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 import { Teacher } from '../po/teacher';
 import { Student } from '../po/student';
-import { PersonInfoService } from './person-info.service';
 
 @Injectable()
 export class LoginService {
@@ -11,8 +10,7 @@ export class LoginService {
   url = 'api/auth/';
 
   constructor(
-    private httpClient: HttpClient,
-    private personInfoService: PersonInfoService) { }
+    private httpClient: HttpClient) { }
 
   /**
    * 教师登录
