@@ -26,7 +26,7 @@ export class NewsInsertComponent implements OnInit {
 
   get diagnostic() { return JSON.stringify(this.news); }
 
-  submitDate(){
+  submitData(){
     //检查数据的完备性
     if(this.news.title == null || this.news.title.length == 0) {
       alert("新闻标题不能为空");
@@ -45,7 +45,17 @@ export class NewsInsertComponent implements OnInit {
           this.goToList();
         }
         else{
-          alert("服务器发生错误");
+          //提示服务器返回的错误信息
+          const errorFields = data['extend']['errorFields'];
+          if(errorFields['title'] != null) {
+            alert("服务器校验: 新闻标题不能为空");
+          }
+          if(errorFields['publisherId'] != null) {
+            alert("服务器校验: 发布人编号不能为空");
+          }
+          if(errorFields['path'] != null) {
+            alert("服务器校验: 新闻内容不能为空");
+          }
         }
       }
     )

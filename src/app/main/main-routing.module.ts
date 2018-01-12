@@ -13,6 +13,7 @@ const mainRoutes: Routes = [
     children: [
       { path: 'lab', loadChildren: 'app/main/laboratory/laboratory.module#LaboratoryModule' },
       { path: 'news', loadChildren: 'app/main/news/news.module#NewsModule' },
+      { path: 'msg', loadChildren: 'app/main/message/message.module#MessageModule' },
       { path: 'exp-doc', loadChildren: 'app/main/exp-doc/exp-doc.module#ExpDocModule' },
       { path: 'course-doc', loadChildren: 'app/main/course-doc/course-doc.module#CourseDocModule' },
       { path: 'teacher', loadChildren: 'app/main/teacher/teacher.module#TeacherModule' },
