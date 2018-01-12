@@ -87,11 +87,13 @@ export class MsgService {
    * 教师添加一个消息
    * @param msg 
    */
-  addOneMessage(msg: Message) {
+  addOneMessage(msg: Message, courseId) {
     let tmp: Message = new Message(null, null, null, null, null, null);
     tmp = Object.assign(tmp, msg);
     const testUrl = this.url + 'add';
-    return this.httpClient.post(testUrl, tmp);
+    const params = new HttpParams()
+    .set('courseId', courseId);
+    return this.httpClient.post(testUrl, tmp, {params});
   }
 
 }

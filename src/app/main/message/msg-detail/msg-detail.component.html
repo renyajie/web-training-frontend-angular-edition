@@ -1,3 +1,20 @@
-<p>
-    msg-detail works
-</p>
+<div class="main-cont" *ngIf="msg$ | async as msg">
+    <div class="main-content" deep="2">
+        <div>
+            <h3>{{msg.title}}</h3>
+            <span>发布日期:</span>
+            <span class="span-margin">{{msg.publishDate}}</span>
+            <span>浏览次数:</span>
+            <span class="span-margin">{{msg.browTime}}</span>
+            <span>发布人编号:</span>
+            <span>{{msg.publisherId}}</span>
+            <hr>
+        </div>
+        <div>
+            <p>{{msg.path}}</p>
+        </div>
+    </div>
+    <div class="main-btn">
+        <button class="btn btn-info" (click)="goBack()">返回</button>
+    </div>
+</div>
