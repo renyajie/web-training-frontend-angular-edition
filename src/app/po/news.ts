@@ -1,7 +1,7 @@
 export class News {
     constructor(
         public id: number,
-        public publishDate: String,
+        public publishDate: string,
         public title: string,
         public path: string,
         public publisherId: number,

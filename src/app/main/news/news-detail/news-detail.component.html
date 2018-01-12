@@ -1,3 +1,20 @@
-<p>
-  news-detail works!
-</p>
+<div class="main-cont" *ngIf="news$ | async as news">
+  <div class="main-content" deep="2">
+    <div>
+      <h3>{{news.title}}</h3>
+        <span>发布日期:</span>
+        <span class="span-margin">{{news.publishDate}}</span>
+        <span>浏览次数:</span>
+        <span class="span-margin">{{news.browTime}}</span>
+        <span>发布人编号:</span>
+        <span>{{news.publisherId}}</span>
+      <hr>
+    </div>
+    <div>
+      <p>{{news.path}}</p>
+    </div>
+  </div>
+  <div class="main-btn">
+    <button class="btn btn-info" (click)="goBack()">返回</button>
+  </div>
+</div>

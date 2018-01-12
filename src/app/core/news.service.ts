@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
+import { News } from '../po/news';
+
 
 @Injectable()
 export class NewsService {
@@ -54,6 +56,17 @@ export class NewsService {
         .set('id', id + '');
       const testUrl = this.url + 'get';
       return this.httpClient.get(testUrl, { params });
+    }
+
+    /**
+     * 新增新闻
+     * @param news 新闻信息 
+     */
+    addOneNew(news: News) {
+      let tmp: News = new News(null, null, null, null, null, null);
+      tmp = Object.assign(tmp, news);
+      const testUrl = this.url + 'add';
+      return this.httpClient.post(testUrl, tmp);
     }
 
 }
