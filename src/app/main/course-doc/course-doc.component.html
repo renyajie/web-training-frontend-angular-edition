@@ -1,3 +1,114 @@
-<div class="colorThree main-content">
-  Hello, Course Document
+<div class="colorFive main-content">
+  <div class="row">
+    <div class="col-md-3">
+      <button type="button" class="btn btn-info btn-sm" (click)="showBeforePicker(null)">{{beforeBtnText}}</button>
+      {{beforeDateText}}
+      <br>
+      <datepicker *ngIf="showBeforeDate" [(ngModel)]="beforeDate" [showWeeks]="true" (onChange)="showBeforePicker($event)" [maxDate]="maxDate"
+        [minDate]="minDate"></datepicker>
+    </div>
+    <div class="col-md-3">
+      <button type="button" class="btn btn-info btn-sm" (click)="showAfterPicker(null)">{{afterBtnText}}</button>
+      {{afterDateText}}
+      <br>
+      <datepicker *ngIf="showAfterDate" [(ngModel)]="afterDate" [showWeeks]="true" (onChange)="showAfterPicker($event)" [maxDate]="maxDate"
+        [minDate]="minDate"></datepicker>
+    </div>
+    <div class="col-md-3">
+      课程编号：
+      <input [(ngModel)]="courseId">
+    </div>
+    <div class="col-md-2">
+      <button type="button" class="btn btn-info btn-sm clearBtn" (click)="clear();getAllCourseDoc();">清空</button>
+      <button type="button" class="btn btn-info btn-sm searchBtn" (click)="getAllCourseDoc(1, courseId);">搜索</button>
+    </div>
+  </div>
+
+  <div class="main-table">
+    <table class="table-bordered table-hover">
+      <tr>
+        <td class="numberColumn">课程编号</td>
+        <td class="nameColumn">课程名称</td>
+        <td class="numberColumn">文档编号</td>
+        <td class="title">文档名称</td>
+        <td class="numberColumn">文档大小</td>
+        <td class="nameColumn">文档类型</td>
+        <td class="dateColumn">上传时间</td>
+        <td>操作</td>
+      </tr>
+      <tr *ngFor="let courseDoc of courseDocs$ | async">
+        <td class="numberColumn">{{courseDoc.courseId}}</td>
+        <td class="nameColumn">{{courseDoc.courseName}}</td>
+        <td class="numberColumn">{{courseDoc.docId}}</td>
+        <td class="title">{{courseDoc.fileName}}</td>
+        <td class="numberColumn">{{courseDoc.size}}KB</td>
+        <td class="nameColumn">{{courseDoc.size}}</td>
+        <td class="dateColumn">{{courseDoc.uploadTime}}</td>
+        <td>
+          <a href="api/courseDoc/download?docId={{courseDoc.docId}}" class="btn btn-info btn-sm">下载</a>
+          <button type="button" class="btn btn-info btn-sm">在线预览</button>
+          <button type="button" class="btn btn-info btn-sm">删除</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="row foot-content">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="main-page">
+        <nav aria-label="Page navigation">
+          <ul class="pagination" *ngIf="pageInfo$ | async as pageInfo">
+            <!-- 如果存在上一页 -->
+            <li *ngIf="pageInfo.hasPreviousPage" (click)="getAllCourseDoc(1, courseId)">
+              <a>
+                首页
+              </a>
+            </li>
+            <li *ngIf="pageInfo.hasPreviousPage" (click)="getAllCourseDoc(pageInfo.pageNum - 1, courseId)">
+              <span>
+                <span aria-hidden="true">&laquo;</span>
+              </span>
+            </li>
+            <!-- 如果不存在上一页 -->
+            <li *ngIf="!pageInfo.hasPreviousPage" class="disabled">
+              <a>
+                首页
+              </a>
+            </li>
+            <li *ngIf="!pageInfo.hasPreviousPage" class="disabled">
+              <span>
+                <span aria-hidden="true">&laquo;</span>
+              </span>
+            </li>
+            <!-- 定义中间页 -->
+            <li *ngFor="let item of pageInfo.navigatepageNums" [class.active]="pageInfo.pageNum === item" (click)="getAllCourseDoc(item, courseId)">
+              <a>{{item}}</a>
+            </li>
+            <!-- 如果存在下一页 -->
+            <li *ngIf="pageInfo.hasNextPage" (click)="getAllCourseDoc(pageInfo.pageNum + 1, courseId)">
+              <a aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+            <li *ngIf="pageInfo.hasNextPage" (click)="getAllCourseDoc(pageInfo.pages, courseId)">
+              <a>
+                末页
+              </a>
+            </li>
+            <!-- 如果不存在下一页 -->
+            <li *ngIf="!pageInfo.hasNextPage" class="disabled">
+              <a aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+            <li *ngIf="!pageInfo.hasNextPage" class="disabled">
+              <a>
+                末页
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
 </div>
