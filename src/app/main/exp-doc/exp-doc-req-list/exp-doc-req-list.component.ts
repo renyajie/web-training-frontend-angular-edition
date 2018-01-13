@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { of } from 'rxjs/observable/of';
 
-import { ExpDocService } from '../../../core/exp-doc.service';
+import { ExpDocReqService } from '../../../core/exp-doc-req.service';
 
 import { DateFormat } from '../../../utility/date-format';
 import { ExpDocReq } from '../../../po/exp-doc-req';
@@ -42,7 +42,7 @@ export class ExpDocReqListComponent implements OnInit {
   courseId: string = '';
 
   constructor(
-    private exDocReqService: ExpDocService,
+    private exDocReqService: ExpDocReqService,
     private router: Router) { 
     //用到的参数一定要初始化，你无法预知你会什么时候调用它。
     this.beforeDate = new Date();

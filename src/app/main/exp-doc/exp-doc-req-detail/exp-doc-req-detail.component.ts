@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/switchMap';
 
-import { ExpDocService } from '../../../core/exp-doc.service';
+import { ExpDocReqService } from '../../../core/exp-doc-req.service';
 
 import { ExpDocReq } from '../../../po/exp-doc-req';
 
@@ -18,7 +18,7 @@ export class ExpDocReqDetailComponent implements OnInit {
   req$: Observable<ExpDocReq>;
 
   constructor(
-    private expDocService: ExpDocService,
+    private expDocService: ExpDocReqService,
     private router: Router,
     private route: ActivatedRoute
   ) { }

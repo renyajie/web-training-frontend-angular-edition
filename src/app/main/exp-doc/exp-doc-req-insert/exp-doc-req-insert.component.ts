@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatepickerModule } from 'ngx-bootstrap';
 
-import { ExpDocService } from '../../../core/exp-doc.service';
+import { ExpDocReqService } from '../../../core/exp-doc-req.service';
 import { PersonInfoService } from '../../../core/person-info.service';
 
 import { ExpDocReq } from '../../../po/exp-doc-req';
@@ -31,7 +31,7 @@ export class ExpDocReqInsertComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private expDocService: ExpDocService,
+    private expDocService: ExpDocReqService,
     private personService: PersonInfoService
   ) { 
     this.expDocReq = new ExpDocReq(null, null, null, null, null, null, null);

@@ -1,3 +1,112 @@
-<p>
-  exp-doc-upload works!
-</p>
+<div class="row">
+  <div class="col-md-3">
+    <button type="button" class="btn btn-info btn-sm" (click)="showBeforePicker(null)">{{beforeBtnText}}</button>
+    {{beforeDateText}}
+    <br>
+    <datepicker *ngIf="showBeforeDate" [(ngModel)]="beforeDate" [showWeeks]="true" (onChange)="showBeforePicker($event)" [maxDate]="maxDate"
+      [minDate]="minDate"></datepicker>
+  </div>
+  <div class="col-md-3">
+    <button type="button" class="btn btn-info btn-sm" (click)="showAfterPicker(null)">{{afterBtnText}}</button>
+    {{afterDateText}}
+    <br>
+    <datepicker *ngIf="showAfterDate" [(ngModel)]="afterDate" [showWeeks]="true" (onChange)="showAfterPicker($event)" [maxDate]="maxDate"
+      [minDate]="minDate"></datepicker>
+  </div>
+  <div class="col-md-3">
+    课程编号：
+    <input [(ngModel)]="courseId">
+  </div>
+  <div class="col-md-2">
+    <button type="button" class="btn btn-info btn-sm clearBtn" (click)="clear();getAllExpDoc();">清空</button>
+    <button type="button" class="btn btn-info btn-sm searchBtn" (click)="getAllExpDoc(1, courseId);">搜索</button>
+  </div>
+</div>
+
+<div class="main-table">
+  <table class="table-bordered table-hover">
+    <tr>
+      <td class="numberColumn">课程编号</td>
+      <td class="nameColumn">课程姓名</td>
+      <td class="numberColumn">学生编号</td>
+      <td class="nameColumn">学生姓名</td>
+      <td class="numberColumn">文档编号</td>
+      <td class="dateColumn">文档上传时间</td>
+      <td class="numberColumn">文档大小</td>
+      <td class="title">文档名称</td>
+      <td>操作</td>
+    </tr>
+    <tr *ngFor="let expDoc of expDocs$ | async">
+      <td class="numberColumn">{{expDoc.courseId}}</td>
+      <td class="nameColumn">{{expDoc.courseName}}</td>
+      <td class="numberColumn">{{expDoc.stuId}}</td>
+      <td class="nameColumn">{{expDoc.stuName}}</td>
+      <td class="numberColumn">{{expDoc.docId}}</td>
+      <td class="dateColumn">{{expDoc.docUploadTime}}</td>
+      <td class="numberColumn">{{expDoc.docSize}}KB</td>
+      <td class="docName">{{expDoc.docName}}</td>
+      <td>
+        <a href="api/exp/download?docId={{expDoc.docId}}">下载</a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="row foot-content">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="main-page">
+      <nav aria-label="Page navigation">
+        <ul class="pagination" *ngIf="pageInfo$ | async as pageInfo">
+          <!-- 如果存在上一页 -->
+          <li *ngIf="pageInfo.hasPreviousPage" (click)="getAllExpDoc(1, courseId)">
+            <a>
+              首页
+            </a>
+          </li>
+          <li *ngIf="pageInfo.hasPreviousPage" (click)="getAllExpDoc(pageInfo.pageNum - 1, courseId)">
+            <span>
+              <span aria-hidden="true">&laquo;</span>
+            </span>
+          </li>
+          <!-- 如果不存在上一页 -->
+          <li *ngIf="!pageInfo.hasPreviousPage" class="disabled">
+            <a>
+              首页
+            </a>
+          </li>
+          <li *ngIf="!pageInfo.hasPreviousPage" class="disabled">
+            <span>
+              <span aria-hidden="true">&laquo;</span>
+            </span>
+          </li>
+          <!-- 定义中间页 -->
+          <li *ngFor="let item of pageInfo.navigatepageNums" [class.active]="pageInfo.pageNum === item" (click)="getAllExpDoc(item, courseId)">
+            <a>{{item}}</a>
+          </li>
+          <!-- 如果存在下一页 -->
+          <li *ngIf="pageInfo.hasNextPage" (click)="getAllExpDoc(pageInfo.pageNum + 1, courseId)">
+            <a aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+          <li *ngIf="pageInfo.hasNextPage" (click)="getAllExpDoc(pageInfo.pages, courseId)">
+            <a>
+              末页
+            </a>
+          </li>
+          <!-- 如果不存在下一页 -->
+          <li *ngIf="!pageInfo.hasNextPage" class="disabled">
+            <a aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+          <li *ngIf="!pageInfo.hasNextPage" class="disabled">
+            <a>
+              末页
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

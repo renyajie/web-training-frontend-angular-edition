@@ -3,26 +3,38 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 import { PersonInfoService } from './person-info.service';
 
-import { ExpDoc } from '../po/exp-doc';
+import { ExpDocReq } from '../po/exp-doc-req';
 
 @Injectable()
-export class ExpDocService {
+export class ExpDocReqService {
 
-  url = 'api/exp/';
+  url = 'api/ex_req/';
 
   constructor(
     private httpClient: HttpClient,
     private personInfoService: PersonInfoService
   ) { }
-  
+
   /**
-   * 根据用户的身份信息获取对应的实验报告上传记录
+   * 新增一个实验报告要求记录
+   * @param expDocReq 实验报告要求记录 
+   */
+  addOneExpDocReq(expDocReq: ExpDocReq) {
+    let tmp: ExpDocReq = new ExpDocReq(null, null, null, null, null, null, null);
+    tmp = Object.assign(tmp, expDocReq);
+    const testUrl = this.url + 'add';
+    return this.httpClient.post(testUrl, tmp);
+  }
+
+  /**
+   * 根据用户的身份信息获取对应的实验报告要求
    * @param pn 页数
-   * @param courseId 课程编号 
+   * @param title 标题
+   * @param courseId 课程编号
    * @param before 大于等于此日期
    * @param after 小于等于此日期
    */
-  getAllExpDoc(pn?, courseId?, before?, after?){
+  getAllRequirement(pn?, title?, courseId?, before?, after?) {
     //根据用户登录信息获取用户身份参数
     let isStudent = this.personInfoService.isStudent;
     let personId = this.personInfoService.account + '';
@@ -42,6 +54,7 @@ export class ExpDocService {
         .set('pn', pn ? pn : '')
         .set(personIdName, personId)
         .set('courseId', courseId ? courseId : '')
+        .set('title', title ? title : '')
         .set('before', before)
         .set('after', after);
     }
@@ -49,13 +62,15 @@ export class ExpDocService {
       params = new HttpParams()
         .set('pn', pn ? pn : '')
         .set(personIdName, personId)
-        .set('courseId', courseId ? courseId : '');
+        .set('courseId', courseId ? courseId : '')
+        .set('title', title ? title : '')
     }
     if (before === null && after != null) {
       params = new HttpParams()
         .set('pn', pn ? pn : '')
         .set(personIdName, personId)
         .set('courseId', courseId ? courseId : '')
+        .set('title', title ? title : '')
         .set('after', after);
     }
     if (before != null && after === null) {
@@ -63,8 +78,21 @@ export class ExpDocService {
         .set('pn', pn ? pn : '')
         .set(personIdName, personId)
         .set('courseId', courseId ? courseId : '')
+        .set('title', title ? title : '')
         .set('before', before);
     }
     return this.httpClient.get(testUrl, { params });
   }
+
+  /**
+   * 根据id请求一个实验报告要求详情
+   * @param id 编号
+   */
+  getOneExpDocReq(id: number | string) {
+    const params = new HttpParams()
+      .set('id', id + '');
+    const testUrl = this.url + 'get';
+    return this.httpClient.get(testUrl, { params });
+  }
+
 }

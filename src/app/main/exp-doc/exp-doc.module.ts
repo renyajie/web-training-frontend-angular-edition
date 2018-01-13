@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ExpDocRoutingModule } from './exp-doc-routing.module';
 
+import { ExpDocReqService } from '../../core/exp-doc-req.service';
 import { ExpDocService } from '../../core/exp-doc.service';
 
 import { ExpDocComponent } from './exp-doc.component';
@@ -16,6 +17,7 @@ import { ExpDocComponent } from './exp-doc.component';
     ExpDocComponent
   ],
   providers: [
+    ExpDocReqService,
     ExpDocService
   ]
 })
