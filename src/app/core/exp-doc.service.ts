@@ -84,4 +84,15 @@ export class ExpDocService {
     return this.httpClient.get(testUrl, { params });
   }
 
+  /**
+   * 根据id请求一个实验报告要求详情
+   * @param id 编号
+   */
+  getOneExpDocReq(id: number | string) {
+    const params = new HttpParams()
+      .set('id', id + '');
+    const testUrl = this.url + 'get';
+    return this.httpClient.get(testUrl, { params });
+  }
+
 }

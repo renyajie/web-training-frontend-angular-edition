@@ -1,4 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
+import 'rxjs/add/operator/switchMap';
+
+import { ExpDocService } from '../../../core/exp-doc.service';
+
+import { ExpDocReq } from '../../../po/exp-doc-req';
 
 @Component({
   selector: 'app-exp-doc-req-detail',
@@ -7,9 +15,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExpDocReqDetailComponent implements OnInit {
 
-  constructor() { }
+  req$: Observable<ExpDocReq>;
+
+  constructor(
+    private expDocService: ExpDocService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+    this.route.paramMap.switchMap((params: ParamMap) =>
+      this.expDocService.getOneExpDocReq(params.get('id'))).subscribe(
+      data => {
+        //若服务器成功返回消息
+        if (data['code'] === 100) {
+          this.req$ = of(data['extend']['info']);
+        }
+        //若发生错误，提示出错
+        else {
+          alert("发生错误");
+        }
+      }
+      );
+  }
+
+  //返回实验报告要求列表
+  goBack() {
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
 }

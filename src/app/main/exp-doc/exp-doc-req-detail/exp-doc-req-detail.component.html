@@ -1,3 +1,22 @@
-<p>
-  exp-doc-req-detail works!
-</p>
+<div class="main-cont" *ngIf="req$ | async as req">
+  <div class="main-content" deep="2">
+    <div>
+      <h3>{{req.title}}</h3>
+      <span>课程编号:</span>
+      <span class="span-margin">{{req.courseId}}</span>
+      <span>发布日期:</span>
+      <span class="span-margin">{{req.publishDate}}</span>
+      <span>截止日期:</span>
+      <span class="span-margin">{{req.deadline}}</span>
+      <span>教师编号:</span>
+      <span>{{req.teacherId}}</span>
+      <hr>
+    </div>
+    <div>
+      <p>{{req.info}}</p>
+    </div>
+  </div>
+  <div class="main-btn">
+    <button class="btn btn-info" (click)="goBack()">返回</button>
+  </div>
+</div>
