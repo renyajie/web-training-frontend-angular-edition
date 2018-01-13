@@ -1,0 +1,62 @@
+
+.main-cont{
+    margin-top: 20px;
+    margin-left: 25%;
+}
+
+h3{
+    font-weight: bold;
+    text-align: center;
+}
+.form-group .ReqInsert-label{
+    width: 100px;
+    margin-top: 10px;
+}
+
+.form-group .ReqInsert-textlabel{
+    position: relative;
+    width: 100px;
+    margin: 0 auto;
+}
+
+.ReqInsert-text{
+    padding: 10px;
+    text-indent: 1em;
+    width: 400px;
+    height: 250px;
+}
+
+.form-group .ReqInsert-input{
+    width: 400px;
+    padding-left: 20px;
+    border: 1px  solid #a8a8a8;
+}
+
+.academy{
+    position:relative;
+    width: 200px;
+    height: 25px;
+    border: 1px  solid #a8a8a8;
+}
+
+.form-control{
+    width: 200px;
+}
+
+.main-btn{
+    margin-top: 20px;
+    margin-left: 35%;    
+}
+
+.main-btn>button:first-child{
+    margin-right: 250px;
+}
+
+datepicker{
+    position: absolute;
+    z-index: 100;
+}
+
+.chooseDeadlineText{
+    padding-left: 20px;
+}

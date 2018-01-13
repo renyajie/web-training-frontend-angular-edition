@@ -8,7 +8,7 @@ import { ExpDocReq } from '../po/exp-doc-req';
 @Injectable()
 export class ExpDocService {
 
-  url = 'api/ex_req';
+  url = 'api/ex_req/';
 
   constructor(
     private httpClient: HttpClient,

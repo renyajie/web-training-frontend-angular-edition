@@ -1,3 +1,28 @@
-<p>
-  exp-doc-req-insert works!
-</p>
+<h3>新增实验报告要求</h3>
+TODO {{diagnostic}}
+<div class="main-cont">
+  <div class="form-group">
+    <label for="reqTitle" class="ReqInsert-label">标题</label>
+    <input type="text" [(ngModel)]="expDocReq.title" class="ReqInsert-input" id="reqTitle" placeholder="标题">
+  </div>
+  <div class="form-group">
+    <label for="courseId" class="ReqInsert-label">课程编号</label>
+    <input type="text" [(ngModel)]="expDocReq.courseId" class="ReqInsert-input" id="courseId" placeholder="课程编号">
+  </div>
+  <div class="form-group">
+    <button type="button" class="btn btn-info btn-sm " (click)="showDeadlinePicker(null)">{{deadlineBtnText}}</button>
+    <span class="chooseDeadlineText">{{deadlineText}}</span>
+    <br>
+    <datepicker *ngIf="showDeadline" [(ngModel)]="deadline" [showWeeks]="true" (onChange)="showDeadlinePicker($event)" [minDate]="minDate"
+      [maxDate]="maxDate"></datepicker>
+  </div>
+  <div class="form-group">
+    <label for="info" class="ReqInsert-label">内容</label>
+    <textarea type="text" [(ngModel)]="expDocReq.info" class="ReqInsert-text" id="info" placeholder="内容"></textarea>
+  </div>
+
+</div>
+<div class="main-btn">
+  <button type="button" class="btn btn-primary" (click)="submitData()">提交</button>
+  <button type="button" class="btn btn-primary" (click)="goToList()">返回</button>
+</div>

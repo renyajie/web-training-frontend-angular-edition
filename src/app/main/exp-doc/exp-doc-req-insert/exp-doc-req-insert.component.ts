@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DatepickerModule } from 'ngx-bootstrap';
 
 import { ExpDocService } from '../../../core/exp-doc.service';
 import { PersonInfoService } from '../../../core/person-info.service';
 
 import { ExpDocReq } from '../../../po/exp-doc-req';
+import { DateFormat } from '../../../utility/date-format';
 
 @Component({
   selector: 'app-exp-doc-req-insert',
@@ -15,6 +17,18 @@ export class ExpDocReqInsertComponent implements OnInit {
 
   expDocReq: ExpDocReq;
 
+  //日期选择框文本
+  deadlineBtnText = '选择截止日期';
+  //是否显示日期选择框
+  showDeadline = false;
+  //用户选择的截止日期
+  deadline: Date;
+  //判断用户是否为第一次选择
+  firstChooseForDeadline = true;
+  //最大,最小可选日期
+  minDate: Date;
+  maxDate: Date;
+
   constructor(
     private router: Router,
     private expDocService: ExpDocService,
@@ -22,12 +36,37 @@ export class ExpDocReqInsertComponent implements OnInit {
   ) { 
     this.expDocReq = new ExpDocReq(null, null, null, null, null, null, null);
     this.expDocReq.teacherId = this.personService.account;
+    this.deadline = new Date();
+    this.minDate = new Date();
+    this.maxDate = new Date();
+    //设置截止日期最迟为4年
+    this.maxDate.setDate(this.minDate.getDate() + 4 * 365);
   }
 
   ngOnInit() {
   }
 
   get diagnostic() { return JSON.stringify(this.expDocReq); }
+
+  /**
+   * 是否显示截止日期选择
+   * @param event 
+   */
+  showDeadlinePicker(event: any) {
+    if (this.firstChooseForDeadline) {
+      this.firstChooseForDeadline = false;
+    }
+    this.showDeadline = !this.showDeadline;
+    this.deadlineBtnText = this.showDeadline ? '完成日期选择' : '选择最早日期';
+    this.expDocReq.deadline = this.deadlineText;
+  }
+
+  get deadlineText() {
+    if (this.firstChooseForDeadline) {
+      return '未选择截止日期';
+    }
+    return DateFormat.formatWithDay(this.deadline);
+  }
 
   submitData(){
     //检查数据的完备性
@@ -37,7 +76,7 @@ export class ExpDocReqInsertComponent implements OnInit {
     if(this.expDocReq.courseId == null) {
       alert("课程编号不能为空");
     }
-    if(this.expDocReq.deadline == null) {
+    if(this.expDocReq.deadline == null || this.expDocReq.deadline.length === 0) {
       alert("截止日期不能为空");
     }
     if(this.expDocReq.info == null || this.expDocReq.info.length == 0) {
@@ -71,7 +110,7 @@ export class ExpDocReqInsertComponent implements OnInit {
   }
 
   goToList(){
-    this.router.navigate(['main/msg']);
+    this.router.navigate(['main/exp-doc']);
   }
 
 }

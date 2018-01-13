@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ExpDocRoutingModule } from './exp-doc-routing.module';
+
+import { ExpDocService } from '../../core/exp-doc.service';
+
 import { ExpDocComponent } from './exp-doc.component';
 
 @NgModule({
@@ -11,6 +14,9 @@ import { ExpDocComponent } from './exp-doc.component';
   ],
   declarations: [
     ExpDocComponent
+  ],
+  providers: [
+    ExpDocService
   ]
 })
 export class ExpDocModule { }
