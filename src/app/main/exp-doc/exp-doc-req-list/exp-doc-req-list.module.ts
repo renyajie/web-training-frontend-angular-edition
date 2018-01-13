@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { DatepickerModule } from 'ngx-bootstrap';
 
 import { ExpDocReqListRoutingModule } from './exp-doc-req-list-routing.module';
 
@@ -9,7 +11,9 @@ import { ExpDocReqDetailComponent } from '../exp-doc-req-detail/exp-doc-req-deta
 @NgModule({
   imports: [
     CommonModule,
-    ExpDocReqListRoutingModule
+    FormsModule,
+    ExpDocReqListRoutingModule,
+    DatepickerModule.forRoot()
   ],
   declarations: [
     ExpDocReqListComponent,

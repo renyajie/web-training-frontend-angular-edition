@@ -1,0 +1,70 @@
+datepicker{
+    position: absolute;
+    z-index: 100;
+}
+
+input {
+    width: 80px;
+}
+
+.top{
+    width: 1000px;
+    position: fixed;
+    top: 60px;
+    right: 100px;
+}
+
+ul>li:nth-child(2){
+    margin-right: 10px;
+}
+
+
+ul>li:nth-child(3){
+    margin-right: 50px;
+}
+
+ul>li input{
+    width: 100px;
+}
+
+.main-table{
+    width: 90%;
+    height: 70%;
+    margin: 50px auto;
+}
+
+.foot-content{
+    height: 15%;
+    margin-left: 30px;
+}
+
+td{
+    height: 30px;
+    text-align: center;
+}
+
+.main-page{
+    position: fixed;
+    right: 100px;
+    bottom: 30px;
+}
+
+.main-btn{
+    margin: 0;
+}
+
+.main-btn button{
+    margin-right: 30px;
+}
+
+.numberColumn{
+    width: 100px;
+}
+
+.dateColumn {
+    width: 150px;
+}
+
+.title {
+    width: 400px;
+}

@@ -15,10 +15,10 @@ export class MsgService {
     private personInfoService: PersonInfoService) { }
 
   /**
-   * 教师获取自己的消息记录
-   * @param publisherId 发布者编号 
-   * @param courseId 课程编号
+   * 根据用户的身份获取对应的消息记录
+   * @param pn 页数
    * @param title 标题
+   * @param courseId 课程编号 
    * @param before 在此日期之前
    * @param after 在此日期之后
    */
@@ -40,7 +40,7 @@ export class MsgService {
     if (before != null && after != null) {
       params = new HttpParams()
         .set('pn', pn ? pn : '')
-        .set(personIdName, personId ? personId : '')
+        .set(personIdName, personId)
         .set('courseId', courseId ? courseId : '')
         .set('title', title ? title : '')
         .set('before', before)
@@ -49,14 +49,14 @@ export class MsgService {
     if (before === null && after === null) {
       params = new HttpParams()
         .set('pn', pn ? pn : '')
-        .set(personIdName, personId ? personId : '')
+        .set(personIdName, personId)
         .set('courseId', courseId ? courseId : '')
         .set('title', title ? title : '')
     }
     if (before === null && after != null) {
       params = new HttpParams()
         .set('pn', pn ? pn : '')
-        .set(personIdName, personId ? personId : '')
+        .set(personIdName, personId)
         .set('courseId', courseId ? courseId : '')
         .set('title', title ? title : '')
         .set('after', after);
@@ -64,7 +64,7 @@ export class MsgService {
     if (before != null && after === null) {
       params = new HttpParams()
         .set('pn', pn ? pn : '')
-        .set(personIdName, personId ? personId : '')
+        .set(personIdName, personId)
         .set('courseId', courseId ? courseId : '')
         .set('title', title ? title : '')
         .set('before', before);

@@ -30,6 +30,9 @@ html, body {
 .colorFour {
     background-color: azure;
 }
+.colorFive {
+    background-color: whitesmoke;
+}
 
 /* 主题内容样式 */
 .main-content{
