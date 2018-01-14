@@ -5,6 +5,7 @@ import { of } from 'rxjs/observable/of';
 import { Router } from '@angular/router';
 
 import { CourseService } from '../../../core/course.service';
+import { PersonInfoService } from '../../../core/person-info.service';
 
 import { CourseAux } from '../../../po/course-aux';
 import { CourseResult } from '../../../po/course-result';
@@ -16,11 +17,15 @@ import { CourseResult } from '../../../po/course-result';
 })
 export class CourseListComponent implements OnInit {
 
+  isStudent: boolean;
   courseAuxArray$: Observable<CourseAux[][]>;
 
   constructor(
     private courseService: CourseService,
-    private router: Router) { }
+    private personInfoService: PersonInfoService,
+    private router: Router) { 
+      this.isStudent = this.personInfoService.isStudent;
+    }
 
   ngOnInit() {
     this.getCourseTable();

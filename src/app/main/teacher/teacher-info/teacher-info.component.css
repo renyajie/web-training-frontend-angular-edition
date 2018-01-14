@@ -45,11 +45,11 @@ h3{
 
 .main-btn{
     margin-top: 20px;
-    margin-left: 35%;    
+    margin-left: 160px;  
 }
 
-.main-btn>button:first-child{
-    margin-right: 250px;
+.main-btn button {
+    width: 300px;
 }
 
 datepicker{

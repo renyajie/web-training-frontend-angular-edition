@@ -1,6 +1,7 @@
 <div class="main-cont">
 
-  <div class="main-btn">
+  <!-- 若当前用户是教师，就显示新增课程按钮，否则去掉 -->
+  <div class="main-btn" *ngIf="isStudent === false">
     <button type="button" class="btn btn-info" (click)="goToInsert()">新增</button>
   </div>
 

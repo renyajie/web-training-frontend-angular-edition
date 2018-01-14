@@ -4,7 +4,8 @@
 <div class="row main">
   <div class="col-md-2 menu">
     <div>
-      <ul>
+      <!-- 若用户登录身份为教师，显示教师的菜单项 -->
+      <ul *ngIf="isStudent === false">
         <li>
           实验室信息管理
           <dl>
@@ -65,6 +66,57 @@
             <dd>
               <a routerLink="./teacher" routerLinkActive="active">教学文档上传</a>
             </dd>
+            <dd>
+              <a routerLink="./teacher/course" routerLinkActive="active">课程安排</a>
+            </dd>
+            <dd>
+              <a routerLink="./teacher/info" routerLinkActive="active">个人信息</a>
+            </dd>
+          </dl>
+        </li>
+      </ul>
+      <!-- 若用户登录身份为学生，显示学生的菜单项 -->
+      <ul *ngIf="isStudent === true">
+        <li>
+          实验室信息管理
+          <dl>
+            <dd>
+              <a routerLink="./lab" routerLinkActive="active">查看实验室</a>
+            </dd>
+          </dl>
+        </li>
+        <li>
+          消息通知推送
+          <dl>
+            <dd>
+              <a routerLink="./msg" routerLinkActive="active">查看消息</a>
+            </dd>
+          </dl>
+        </li>
+        <li>
+          实验报告管理
+          <dl>
+            <dd>
+              <a routerLink="./exp-doc" routerLinkActive="active">实验报告要求记录</a>
+            </dd>
+            <dd>
+              <a routerLink="./exp-doc/add" routerLinkActive="active">上传实验报告</a>
+            </dd>
+            <dd>
+              <a routerLink="./exp-doc/upload" routerLinkActive="active">实验报告上传记录</a>
+            </dd>
+          </dl>
+        </li>
+        <li>教学文档管理
+          <dl>
+            <dd>
+              <a routerLink="./course-doc" routerLinkActive="active">教学文档列表</a>
+            </dd>
+          </dl>
+        </li>
+        <li>
+          学生个人中心
+          <dl>
             <dd>
               <a routerLink="./teacher/course" routerLinkActive="active">课程安排</a>
             </dd>

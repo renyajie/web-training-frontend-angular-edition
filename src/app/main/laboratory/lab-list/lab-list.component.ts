@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { LabService } from '../../../core/lab.service';
+import { PersonInfoService } from '../../../core/person-info.service';
+
 import { Laboratory } from '../../../po/laboratory';
 import { Observable } from 'rxjs/Observable';
 
@@ -15,12 +17,17 @@ import { of } from 'rxjs/observable/of';
 })
 export class LabListComponent implements OnInit {
 
+  isStudent: boolean;
+
   pageInfo$: Observable<any>;
   labs$: Observable<Laboratory[]>;
 
   constructor(
     private labService: LabService,
-    private router: Router) { }
+    private personInfoService: PersonInfoService,
+    private router: Router) { 
+      this.isStudent = this.personInfoService.isStudent;
+    }
 
   /**
    * 进入页面时先请求数据

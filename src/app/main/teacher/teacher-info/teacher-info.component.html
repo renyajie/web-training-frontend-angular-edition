@@ -1,6 +1,5 @@
 <h3>教师个人信息</h3>
-TODO {{diagnostic}}
-<div class="main-cont" *ngIf="showData">
+<div class="main-cont" *ngIf="teacher$ | async as teacher">
   <div class="form-group">
     <label for="id" class="TeacherUpdate-label">工号</label>
     <input type="text" [(ngModel)]="teacher.teacherId" class="TeacherUpdate-input" id="id" placeholder="工号" readonly="true">
@@ -44,8 +43,7 @@ TODO {{diagnostic}}
     <label for="major" class="TeacherUpdate-label">专业</label>
     <input type="text" [(ngModel)]="teacher.major" class="TeacherUpdate-input" id="major" placeholder="专业">
   </div>
-
-</div>
-<div class="main-btn">
-  <button type="button" class="btn btn-primary" (click)="submitData()">提交</button>
+  <div class="main-btn">
+    <button type="button" class="btn btn-primary" (click)="submitData(teacher)">提交</button>
+  </div>
 </div>
