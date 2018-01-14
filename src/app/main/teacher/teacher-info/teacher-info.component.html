@@ -1,3 +1,51 @@
-<p>
-  teacher-info works!
-</p>
+<h3>教师个人信息</h3>
+TODO {{diagnostic}}
+<div class="main-cont" *ngIf="showData">
+  <div class="form-group">
+    <label for="id" class="TeacherUpdate-label">工号</label>
+    <input type="text" [(ngModel)]="teacher.teacherId" class="TeacherUpdate-input" id="id" placeholder="工号" readonly="true">
+  </div>
+  <div class="form-group">
+    <label for="name" class="TeacherUpdate-label">姓名</label>
+    <input type="text" [(ngModel)]="teacher.teacherName" class="TeacherUpdate-input" id="name" placeholder="姓名">
+  </div>
+  <div class="form-group">
+    <label for="passwd" class="TeacherUpdate-label">密码</label>
+    <input type="text" [(ngModel)]="teacher.passwd" class="TeacherUpdate-input" id="passwd" placeholder="密码">
+  </div>
+  <div class="form-group">
+    <label for="phone" class="TeacherUpdate-label">手机</label>
+    <input type="text" [(ngModel)]="teacher.phone" class="TeacherUpdate-input" id="phone" placeholder="手机号码">
+  </div>
+  <div class="form-group">
+    <label for="job" class="TeacherUpdate-label">职称</label>
+    <input type="text" [(ngModel)]="teacher.phone" class="TeacherUpdate-input" id="job" placeholder="职称">
+  </div>
+  <div class="form-group">
+    <label for="gender" class="TeacherUpdate-label">性别</label>
+    <input type="text" [(ngModel)]="teacher.gender" class="TeacherUpdate-input" id="gender" placeholder="性别">
+  </div>
+  <div class="form-group">
+    <button type="button" class="btn btn-info btn-sm " (click)="showBirthPicker(null)">{{birthBtnText}}</button>
+    <span class="chooseDeadlineText">{{birthText}}</span>
+    <br>
+    <datepicker *ngIf="showBirth" [(ngModel)]="birth" [showWeeks]="true" (onChange)="showBirthPicker($event)" [minDate]="minDate"
+      [maxDate]="maxDate"></datepicker>
+  </div>
+  <div class="form-group">
+    <label for="email" class="TeacherUpdate-label">邮箱</label>
+    <input type="email" [(ngModel)]="teacher.email" class="TeacherUpdate-input" id="email" placeholder="邮箱">
+  </div>
+  <div class="form-group">
+    <label for="office" class="TeacherUpdate-label">办公地址</label>
+    <input type="text" [(ngModel)]="teacher.office" class="TeacherUpdate-input" id="office" placeholder="办公地址">
+  </div>
+  <div class="form-group">
+    <label for="major" class="TeacherUpdate-label">专业</label>
+    <input type="text" [(ngModel)]="teacher.major" class="TeacherUpdate-input" id="major" placeholder="专业">
+  </div>
+
+</div>
+<div class="main-btn">
+  <button type="button" class="btn btn-primary" (click)="submitData()">提交</button>
+</div>

@@ -47,8 +47,9 @@ export class CourseService {
   addOneCourse(course: Course) {
     let tmp: Course = new Course(null, null, null, null, null, null, null, null);
     tmp = Object.assign(tmp, course);
+    tmp.teacherId = this.personInfoService.account;
     const testUrl = this.url + 'add';
-    this.httpClient.post(testUrl, course);
+    return this.httpClient.post(testUrl, tmp);
   }
 
   /**

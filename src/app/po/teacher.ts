@@ -6,7 +6,7 @@ export class Teacher {
         public phone?: string,
         public job?: string,
         public gender?: string,
-        public birth?: Date,
+        public birth?: string,
         public office?: String,
         public major?: String,
         public email?: String

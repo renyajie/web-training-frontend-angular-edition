@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 
 import { CourseRoutingModule } from './course-routing.module';
 
+import { CourseService } from '../../core/course.service';
+
 import { CourseComponent } from './course.component';
 
 @NgModule({
@@ -14,6 +16,9 @@ import { CourseComponent } from './course.component';
   ],
   declarations: [
     CourseComponent
+  ],
+  providers: [
+    CourseService
   ]
 })
 export class CourseModule { }

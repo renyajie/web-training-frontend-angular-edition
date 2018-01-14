@@ -1,5 +1,9 @@
 <div class="main-cont">
 
+  <div class="main-btn">
+    <button type="button" class="btn btn-info" (click)="goToInsert()">新增</button>
+  </div>
+
   <div class="main-table">
     <table class="table table-bordered table-hover">
       <tr>
@@ -20,11 +24,16 @@
           <ng-container *ngIf="item.isOccupied === false">
             <!-- Angular只能设置prop,不能设置attr -->
             <td [attr.rowspan]="item.rowSpan">
-              {{item.rowOne}}<br>{{item.rowTwo}}<br>{{item.rowThree}}<br>{{item.rowFour}}
+              {{item.rowOne}}
+              <br>{{item.rowTwo}}
+              <br>{{item.rowThree}}
+              <br>{{item.rowFour}}
             </td>
           </ng-container>
         </ng-container>
       </tr>
     </table>
   </div>
+
+
 </div>

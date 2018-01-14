@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { of } from 'rxjs/observable/of';
+import { Router } from '@angular/router';
 
 import { CourseService } from '../../../core/course.service';
 
@@ -17,7 +18,9 @@ export class CourseListComponent implements OnInit {
 
   courseAuxArray$: Observable<CourseAux[][]>;
 
-  constructor(private courseService: CourseService) { }
+  constructor(
+    private courseService: CourseService,
+    private router: Router) { }
 
   ngOnInit() {
     this.getCourseTable();
@@ -38,6 +41,10 @@ export class CourseListComponent implements OnInit {
         }
       }
     )
+  }
+
+  goToInsert() {
+    this.router.navigate(['main/teacher/course/insert'])
   }
 
 }
