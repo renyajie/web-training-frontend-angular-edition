@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { FileUploader, FileUploaderOptions } from 'ng2-file-upload';
 import { Laboratory } from '../../../po/laboratory';
 
@@ -19,10 +19,7 @@ export class LabInsertComponent implements OnInit {
     itemAlias: "image"
   });
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute
-  ) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
 

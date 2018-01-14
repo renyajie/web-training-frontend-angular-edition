@@ -1,69 +1,82 @@
-
-  <div class="header">
-    <app-main-header></app-main-header>
-  </div>
-  <div class="row main">
-    <div class="col-md-2 menu">
-      <div>
-        <ul>
-          <li>
-            实验室信息管理
-            <dl>
-              <dd>
-                <a routerLink="./lab" routerLinkActive="active">查看实验室</a>
-              </dd>
-              <dd>
-                <a routerLink="./lab/insert" routerLinkActive="active">新增实验室</a>
-              </dd>
-            </dl>
-          </li>
-          <li>
-            信息采集与发布
-            <dl>
-              <dd>
-                <a routerLink="./news" routerLinkActive="active">查看新闻</a>
-              </dd>
-              <dd>
-                <a routerLink="./news/insert" routerLinkActive="active">新增新闻</a>
-              </dd>
-            </dl>
-          </li>
-          <li>
-            消息通知推送
-            <dl>
-              <dd>
-                <a routerLink="./msg" routerLinkActive="active">查看消息</a>
-              </dd>
-              <dd>
-                <a routerLink="./msg/insert" routerLinkActive="active">新增消息</a>
-              </dd>
-            </dl>
-          </li>
-          <li>
-            实验报告管理
-            <dl>
-              <dd>
-                <a routerLink="./exp-doc" routerLinkActive="active">实验报告要求记录</a>
-              </dd>
-              <dd>
-                <a routerLink="./exp-doc/insert" routerLinkActive="active">新增报告要求</a>
-              </dd>
-              <dd>
-                <a routerLink="./exp-doc/upload" routerLinkActive="active">实验报告上传记录</a>
-              </dd>
-            </dl>
-          </li>
-          <li>
-            <a routerLink="./course-doc" routerLinkActive="active">教学文档管理</a>
-          </li>
-          <li>
-            <a routerLink="./teacher" routerLinkActive="active">教师个人中心</a>
-          </li>
-  
-        </ul>
-      </div>
+<div class="header">
+  <app-main-header></app-main-header>
+</div>
+<div class="row main">
+  <div class="col-md-2 menu">
+    <div>
+      <ul>
+        <li>
+          实验室信息管理
+          <dl>
+            <dd>
+              <a routerLink="./lab" routerLinkActive="active">查看实验室</a>
+            </dd>
+            <dd>
+              <a routerLink="./lab/insert" routerLinkActive="active">新增实验室</a>
+            </dd>
+          </dl>
+        </li>
+        <li>
+          信息采集与发布
+          <dl>
+            <dd>
+              <a routerLink="./news" routerLinkActive="active">查看新闻</a>
+            </dd>
+            <dd>
+              <a routerLink="./news/insert" routerLinkActive="active">新增新闻</a>
+            </dd>
+          </dl>
+        </li>
+        <li>
+          消息通知推送
+          <dl>
+            <dd>
+              <a routerLink="./msg" routerLinkActive="active">查看消息</a>
+            </dd>
+            <dd>
+              <a routerLink="./msg/insert" routerLinkActive="active">新增消息</a>
+            </dd>
+          </dl>
+        </li>
+        <li>
+          实验报告管理
+          <dl>
+            <dd>
+              <a routerLink="./exp-doc" routerLinkActive="active">实验报告要求记录</a>
+            </dd>
+            <dd>
+              <a routerLink="./exp-doc/insert" routerLinkActive="active">新增报告要求</a>
+            </dd>
+            <dd>
+              <a routerLink="./exp-doc/upload" routerLinkActive="active">实验报告上传记录</a>
+            </dd>
+          </dl>
+        </li>
+        <li>教学文档管理
+          <dl>
+            <dd>
+              <a routerLink="./course-doc" routerLinkActive="active">教学文档列表</a>
+            </dd>
+          </dl>
+        </li>
+        <li>
+          教师个人中心
+          <dl>
+            <dd>
+              <a routerLink="./teacher" routerLinkActive="active">教学文档上传</a>
+            </dd>
+            <dd>
+              <a routerLink="./teacher/course" routerLinkActive="active">课程安排</a>
+            </dd>
+            <dd>
+              <a routerLink="./teacher/info" routerLinkActive="active">个人信息</a>
+            </dd>
+          </dl>
+        </li>
+      </ul>
     </div>
-    <div class="col-md-10 col-md-offset-0 content">
-      <router-outlet></router-outlet>
-    </div>
   </div>
+  <div class="col-md-10 col-md-offset-0 content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
