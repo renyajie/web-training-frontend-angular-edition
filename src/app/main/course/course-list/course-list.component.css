@@ -1,0 +1,33 @@
+.main-cont{
+    overflow:scroll;
+    height: 100%;
+}
+
+ul>li:nth-child(2){
+   margin-left: 200px;
+}
+
+
+.main-table{
+    margin-top: 20px;
+    text-align: center;
+    height: 90%;
+}
+
+table td{
+    vertical-align: middle;
+    border-color: black;
+}
+
+.small-width {
+    width: 100px;
+}
+
+.normal-width {
+    width: 250px;
+}
+
+.course-width {
+    width: 120px;
+}
+

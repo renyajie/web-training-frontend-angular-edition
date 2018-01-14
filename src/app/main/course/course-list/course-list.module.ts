@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { CourseListRoutingModule } from './course-list-routing.module';
 
+import { CourseService } from '../../../core/course.service';
+
 import { CourseListComponent } from './course-list.component';
 
 @NgModule({
@@ -12,6 +14,9 @@ import { CourseListComponent } from './course-list.component';
   ],
   declarations: [
     CourseListComponent
+  ],
+  providers: [
+    CourseService
   ]
 })
 export class CourseListModule { }

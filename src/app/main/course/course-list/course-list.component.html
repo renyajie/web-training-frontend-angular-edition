@@ -1,3 +1,30 @@
-<p>
-  course-list works!
-</p>
+<div class="main-cont">
+
+  <div class="main-table">
+    <table class="table table-bordered table-hover">
+      <tr>
+        <!-- 列宽设在头一列有效 -->
+        <td class="time course-width">时间</td>
+        <td class="Mon normal-width">星期一</td>
+        <td class="Tues normal-width">星期二</td>
+        <td class="Wed normal-width">星期三</td>
+        <td class="Thur normal-width">星期四</td>
+        <td class="Fri normal-width">星期五</td>
+        <td class="Sat small-width">星期六</td>
+        <td class="Sun small-width">星期日</td>
+      </tr>
+      <tr class="row1" *ngFor="let courseAuxs of courseAuxArray$ | async; let i = index">
+        <td class="time">第{{i + 1}}节</td>
+        <!-- 一个标签最多只能有一个ng命令 -->
+        <ng-container *ngFor="let item of courseAuxs; let j = index">
+          <ng-container *ngIf="item.isOccupied === false">
+            <!-- Angular只能设置prop,不能设置attr -->
+            <td [attr.rowspan]="item.rowSpan">
+              {{item.rowOne}}<br>{{item.rowTwo}}<br>{{item.rowThree}}<br>{{item.rowFour}}
+            </td>
+          </ng-container>
+        </ng-container>
+      </tr>
+    </table>
+  </div>
+</div>

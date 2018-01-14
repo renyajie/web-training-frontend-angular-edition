@@ -33,6 +33,9 @@ html, body {
 .colorFive {
     background-color: whitesmoke;
 }
+.white {
+    background-color: white;
+}
 
 /* 主题内容样式 */
 .main-content{
