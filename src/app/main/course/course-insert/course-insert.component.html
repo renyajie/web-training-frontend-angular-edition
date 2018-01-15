@@ -1,9 +1,13 @@
 <h3>新增课程安排</h3>
 TODO {{diagnostic}}
-<div class="main-cont">
+<div class="main-cont" *ngIf="courseInfo$">
     <div class="form-group">
         <label for="courseId" class="MessageInsert-label">课程编号</label>
-        <input type="number" [(ngModel)]="course.courseId" class="MessageInsert-input" id="courseId" placeholder="课程编号">
+        <select class="MessageInsert-input" [(ngModel)]="course.courseId" id="courseId">
+            <option *ngFor="let courseInfo of courseInfo$ | async" value="{{courseInfo.id}}">
+                {{courseInfo.courseDescription}}
+            </option>
+        </select>
     </div>
     <div class="form-group">
         <label for="startCourseTime" class="MessageInsert-label">课程开始时间</label>

@@ -44,3 +44,7 @@ datepicker{
 input {
     width: 80px;
 }
+
+select {
+    height: 30px;
+}

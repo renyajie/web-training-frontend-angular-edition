@@ -8,10 +8,12 @@ import { of } from 'rxjs/observable/of';
 
 import { ExpDocReqService } from '../../../core/exp-doc-req.service';
 import { PersonInfoService } from '../../../core/person-info.service';
+import { CourseService } from '../../../core/course.service';
 
 import { DateFormat } from '../../../utility/date-format';
 import { ExpDocReqForTeacher } from '../../../po/exp-doc-req-teacher';
 import { ExpDocReqForStudent } from '../../../po/exp-doc-req-student';
+import { CourseInfo } from '../../../po/course-info';
 
 /**
  * 实验报告要求列表页面，这个页面比较特殊，为了代码复用，涉及到两种布局，需要根据当前用户的身份进行选择
@@ -25,6 +27,7 @@ export class ExpDocReqListComponent implements OnInit {
 
   isStudent: boolean;
 
+  courseInfo$: Observable<CourseInfo[]>;
   pageInfo$: Observable<any>;
   reqs$: Observable<any>;
 
@@ -51,6 +54,7 @@ export class ExpDocReqListComponent implements OnInit {
   constructor(
     private exDocReqService: ExpDocReqService,
     private personInfoService: PersonInfoService,
+    private courseService: CourseService,
     private router: Router) { 
     //获取当前用户的身份，以便复用布局，显示不同内容
     this.isStudent = this.personInfoService.isStudent;
@@ -69,6 +73,26 @@ export class ExpDocReqListComponent implements OnInit {
    * 启动时向服务器获取所有实验报告要求信息
    */
   ngOnInit() {
+    //获取课程基本信息，用于下拉列表
+    let courseInfos = [];
+    this.courseService.getAllCourseBaseInfo().subscribe(
+      data => {
+        //若服务器成功返回数据
+        if(data['code'] === 100) {
+          data['extend']['info'].map(courseInfo => {
+            courseInfos.push(CourseInfo.fromJSON(courseInfo));
+          })
+          //TODO removes
+          console.log(courseInfos);
+          this.courseInfo$ = of(courseInfos);
+        }
+        //若出错
+        else {
+          alert("服务器发生错误");
+        }
+      }
+    )
+    //获取实验要求
     this.getAllRequirement();
   }
 

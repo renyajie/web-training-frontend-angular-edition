@@ -7,9 +7,11 @@ import { of } from 'rxjs/observable/of';
 
 import { ExpDocService } from '../../../core/exp-doc.service';
 import { PersonInfoService } from '../../../core/person-info.service';
+import { CourseService } from '../../../core/course.service';
 
 import { DateFormat } from '../../../utility/date-format';
 import { ExpDoc } from '../../../po/exp-doc';
+import { CourseInfo } from '../../../po/course-info';
 
 @Component({
   selector: 'app-exp-doc-upload',
@@ -20,6 +22,7 @@ export class ExpDocUploadComponent implements OnInit {
 
   isStudent: boolean;
 
+  courseInfo$: Observable<CourseInfo[]>;
   pageInfo$: Observable<any>;
   expDocs$: Observable<ExpDoc[]>;
 
@@ -43,7 +46,8 @@ export class ExpDocUploadComponent implements OnInit {
 
   constructor(
     private expDocService: ExpDocService,
-    private personInfoService: PersonInfoService) {
+    private personInfoService: PersonInfoService,
+    private courseService: CourseService) {
     this.isStudent = this.personInfoService.isStudent;
     //用到的参数一定要初始化，你无法预知你会什么时候调用它。
     this.beforeDate = new Date();
@@ -60,6 +64,26 @@ export class ExpDocUploadComponent implements OnInit {
    * 启动时无条件向服务器请求数据
    */
   ngOnInit() {
+    //先获取课程列表
+    let courseInfos = [];
+    this.courseService.getAllCourseBaseInfo().subscribe(
+      data => {
+        //若服务器成功返回数据
+        if(data['code'] === 100) {
+          data['extend']['info'].map(courseInfo => {
+            courseInfos.push(CourseInfo.fromJSON(courseInfo));
+          })
+          //TODO removes
+          console.log(courseInfos);
+          this.courseInfo$ = of(courseInfos);
+        }
+        //若出错
+        else {
+          alert("服务器发生错误");
+        }
+      }
+    )
+    //获取学生实验报告上传记录
     this.getAllExpDoc();
   }
 

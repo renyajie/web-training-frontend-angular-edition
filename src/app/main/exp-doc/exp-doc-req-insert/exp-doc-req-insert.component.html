@@ -6,8 +6,12 @@ TODO {{diagnostic}}
     <input type="text" [(ngModel)]="expDocReq.title" class="ReqInsert-input" id="reqTitle" placeholder="标题">
   </div>
   <div class="form-group">
-    <label for="courseId" class="ReqInsert-label">课程编号</label>
-    <input type="text" [(ngModel)]="expDocReq.courseId" class="ReqInsert-input" id="courseId" placeholder="课程编号">
+      <label for="courseId" class="ReqInsert-label">课程编号</label>
+      <select class="ReqInsert-input" [(ngModel)]="expDocReq.courseId" id="courseId">
+          <option *ngFor="let courseInfo of courseInfo$ | async" value="{{courseInfo.id}}">
+              {{courseInfo.courseDescription}}
+          </option>
+      </select>
   </div>
   <div class="form-group">
     <button type="button" class="btn btn-info btn-sm " (click)="showDeadlinePicker(null)">{{deadlineBtnText}}</button>

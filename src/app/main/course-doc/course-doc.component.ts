@@ -7,9 +7,11 @@ import { of } from 'rxjs/observable/of';
 
 import { CourseDocService } from '../../core/course-doc.service';
 import { PersonInfoService } from '../../core/person-info.service';
+import { CourseService } from '../../core/course.service';
 
 import { DateFormat } from '../../utility/date-format';
 import { CourseDoc } from '../../po/course-doc';
+import { CourseInfo } from '../../po/course-info';
 
 @Component({
   selector: 'app-course-doc',
@@ -20,6 +22,7 @@ export class CourseDocComponent implements OnInit {
   isStudent: boolean;
   pageInfo$: Observable<any>;
   courseDocs$: Observable<CourseDoc[]>;
+  courseInfo$: Observable<CourseInfo[]>;
 
   //日期选择框文本
   beforeBtnText = '选择最早日期';
@@ -41,7 +44,8 @@ export class CourseDocComponent implements OnInit {
 
   constructor(
     private courseDocService: CourseDocService,
-    private personInfoService: PersonInfoService) {
+    private personInfoService: PersonInfoService,
+    private courseService: CourseService) {
     this.isStudent = this.personInfoService.isStudent;
     //用到的参数一定要初始化，你无法预知你会什么时候调用它。
     this.beforeDate = new Date();
@@ -58,6 +62,26 @@ export class CourseDocComponent implements OnInit {
    * 启动时无条件向服务器请求数据
    */
   ngOnInit() {
+    //先获取课程列表
+    let courseInfos = [];
+    this.courseService.getAllCourseBaseInfo().subscribe(
+      data => {
+        //若服务器成功返回数据
+        if(data['code'] === 100) {
+          data['extend']['info'].map(courseInfo => {
+            courseInfos.push(CourseInfo.fromJSON(courseInfo));
+          })
+          //TODO removes
+          console.log(courseInfos);
+          this.courseInfo$ = of(courseInfos);
+        }
+        //若出错
+        else {
+          alert("服务器发生错误");
+        }
+      }
+    )
+    //获取所有的教学文档记录
     this.getAllCourseDoc();
   }
 

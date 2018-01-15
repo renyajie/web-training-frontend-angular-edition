@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FileUploader, FileUploaderOptions } from 'ng2-file-upload';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import { of } from 'rxjs/observable/of';
 
 import { PersonInfoService } from '../../../core/person-info.service';
+import { CourseService } from '../../../core/course.service';
+
+import { CourseInfo } from '../../../po/course-info';
 
 @Component({
   selector: 'app-course-doc-upload',
@@ -11,6 +17,7 @@ import { PersonInfoService } from '../../../core/person-info.service';
 })
 export class CourseDocUploadComponent implements OnInit {
 
+  courseInfo$: Observable<CourseInfo[]>;
   courseId = '';
   teacherId: number;
 
@@ -23,11 +30,31 @@ export class CourseDocUploadComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private personInfoService: PersonInfoService) {
+    private personInfoService: PersonInfoService,
+    private courseService: CourseService) {
     this.teacherId = this.personInfoService.account;
   }
 
   ngOnInit() {
+    //获取课程基本信息，用于下拉列表
+    let courseInfos = [];
+    this.courseService.getAllCourseBaseInfo().subscribe(
+      data => {
+        //若服务器成功返回数据
+        if(data['code'] === 100) {
+          data['extend']['info'].map(courseInfo => {
+            courseInfos.push(CourseInfo.fromJSON(courseInfo));
+          })
+          //TODO removes
+          console.log(courseInfos);
+          this.courseInfo$ = of(courseInfos);
+        }
+        //若出错
+        else {
+          alert("服务器发生错误");
+        }
+      }
+    )
   }
 
   get diagnostic() { return JSON.stringify(this.courseId); }

@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatepickerModule } from 'ngx-bootstrap';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import { of } from 'rxjs/observable/of';
 
 import { ExpDocReqService } from '../../../core/exp-doc-req.service';
 import { PersonInfoService } from '../../../core/person-info.service';
+import { CourseService } from '../../../core/course.service';
 
 import { ExpDocReqForTeacher } from '../../../po/exp-doc-req-teacher';
 import { DateFormat } from '../../../utility/date-format';
+import { CourseInfo } from '../../../po/course-info';
 
 @Component({
   selector: 'app-exp-doc-req-insert',
@@ -15,6 +20,7 @@ import { DateFormat } from '../../../utility/date-format';
 })
 export class ExpDocReqInsertComponent implements OnInit {
 
+  courseInfo$: Observable<CourseInfo[]>;
   expDocReq: ExpDocReqForTeacher;
 
   //日期选择框文本
@@ -32,7 +38,8 @@ export class ExpDocReqInsertComponent implements OnInit {
   constructor(
     private router: Router,
     private expDocService: ExpDocReqService,
-    private personService: PersonInfoService
+    private personService: PersonInfoService,
+    private courseService: CourseService
   ) { 
     this.expDocReq = new ExpDocReqForTeacher(null, null, null, null, null, null, null);
     this.expDocReq.teacherId = this.personService.account;
@@ -44,6 +51,25 @@ export class ExpDocReqInsertComponent implements OnInit {
   }
 
   ngOnInit() {
+    //获取课程基本信息，用于下拉列表
+    let courseInfos = [];
+    this.courseService.getAllCourseBaseInfo().subscribe(
+      data => {
+        //若服务器成功返回数据
+        if(data['code'] === 100) {
+          data['extend']['info'].map(courseInfo => {
+            courseInfos.push(CourseInfo.fromJSON(courseInfo));
+          })
+          //TODO removes
+          console.log(courseInfos);
+          this.courseInfo$ = of(courseInfos);
+        }
+        //若出错
+        else {
+          alert("服务器发生错误");
+        }
+      }
+    )
   }
 
   get diagnostic() { return JSON.stringify(this.expDocReq); }

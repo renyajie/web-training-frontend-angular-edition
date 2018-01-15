@@ -66,6 +66,24 @@ export class CourseService {
   }
 
   /**
+   * 获取所有的课程基本信息，用于教师新增课程
+   */
+  getAllCourseBaseInfo() {
+    const testUrl = this.url + 'getAllCourseBaseInfo';
+    return this.httpClient.get(testUrl);
+  }
+
+  /**
+   * 返回某个教师的所有的课程基本信息，用于录入课程学生信息
+   */
+  getAllCourseBaseInfoForOneTeacher() {
+    const params = new HttpParams()
+    .set('teacherId', this.personInfoService.account + '');
+    const testUrl = this.url + 'getAllCourseBaseInfoForOneTeacher';
+    return this.httpClient.get(testUrl, {params});
+  }
+
+  /**
    * 计算课表中间数据CourseAux,用于生成课程表
    * @param courseResults 服务器查询到的课程信息
    */

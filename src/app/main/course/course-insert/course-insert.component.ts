@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import { of } from 'rxjs/observable/of';
 
 import { CourseService } from '../../../core/course.service';
 
 import { Course } from '../../../po/course';
+import { CourseInfo } from '../../../po/course-info';
 
 @Component({
   selector: 'app-course',
@@ -12,6 +16,7 @@ import { Course } from '../../../po/course';
 })
 export class CourseInsertComponent implements OnInit {
 
+  courseInfo$: Observable<CourseInfo[]>;
   course: Course;
 
   constructor(
@@ -24,6 +29,25 @@ export class CourseInsertComponent implements OnInit {
   get diagnostic() { return JSON.stringify(this.course); }
 
   ngOnInit() {
+    //获取课程基本信息，用于下拉列表
+    let courseInfos = [];
+    this.courseService.getAllCourseBaseInfo().subscribe(
+      data => {
+        //若服务器成功返回数据
+        if(data['code'] === 100) {
+          data['extend']['info'].map(courseInfo => {
+            courseInfos.push(CourseInfo.fromJSON(courseInfo));
+          })
+          //TODO removes
+          console.log(courseInfos);
+          this.courseInfo$ = of(courseInfos);
+        }
+        //若出错
+        else {
+          alert("服务器发生错误");
+        }
+      }
+    )
   }
 
   submitData(){

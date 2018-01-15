@@ -73,3 +73,7 @@ td{
 .title {
     width: 400px;
 }
+
+select {
+    height: 30px;
+}

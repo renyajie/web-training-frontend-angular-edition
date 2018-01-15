@@ -1,105 +1,109 @@
 <div class="row">
-  <div class="col-md-3">
-      <button type="button" class="btn btn-info btn-sm" (click)="showBeforePicker(null)">{{beforeBtnText}}</button>
-      {{beforeDateText}}
-      <br>
-      <datepicker *ngIf="showBeforeDate" [(ngModel)]="beforeDate" [showWeeks]="true" (onChange)="showBeforePicker($event)" [maxDate]="maxDate"
-          [minDate]="minDate"></datepicker>
-  </div>
-  <div class="col-md-3">
-      <button type="button" class="btn btn-info btn-sm" (click)="showAfterPicker(null)">{{afterBtnText}}</button>
-      {{afterDateText}}
-      <br>
-      <datepicker *ngIf="showAfterDate" [(ngModel)]="afterDate" [showWeeks]="true" (onChange)="showAfterPicker($event)" [maxDate]="maxDate"
-          [minDate]="minDate"></datepicker>
-  </div>
-  <div class="col-md-2">
-      标题模糊：
-      <input [(ngModel)]="title">
-  </div>
-  <div class="col-md-2">
-    课程编号:
-    <input [(ngModel)]="courseId">
-  </div>
-  <div class="col-md-2">
-      <button type="button" class="btn btn-info btn-sm" (click)="clear();getAllMessage();">清空</button>
-      <button type="button" class="btn btn-info btn-sm" (click)="getAllMessage(1, title, courseId);">搜索</button>
-  </div>
+    <div class="col-md-3">
+        <button type="button" class="btn btn-info btn-sm" (click)="showBeforePicker(null)">{{beforeBtnText}}</button>
+        {{beforeDateText}}
+        <br>
+        <datepicker *ngIf="showBeforeDate" [(ngModel)]="beforeDate" [showWeeks]="true" (onChange)="showBeforePicker($event)" [maxDate]="maxDate"
+            [minDate]="minDate"></datepicker>
+    </div>
+    <div class="col-md-3">
+        <button type="button" class="btn btn-info btn-sm" (click)="showAfterPicker(null)">{{afterBtnText}}</button>
+        {{afterDateText}}
+        <br>
+        <datepicker *ngIf="showAfterDate" [(ngModel)]="afterDate" [showWeeks]="true" (onChange)="showAfterPicker($event)" [maxDate]="maxDate"
+            [minDate]="minDate"></datepicker>
+    </div>
+    <div class="col-md-2">
+        标题模糊：
+        <input [(ngModel)]="title">
+    </div>
+    <div class="col-md-2">
+        课程编号:
+        <select [(ngModel)]="courseId" id="courseId">
+            <option *ngFor="let courseInfo of courseInfo$ | async" value="{{courseInfo.id}}">
+                {{courseInfo.courseDescription}}
+            </option>
+        </select>
+    </div>
+    <div class="col-md-2">
+        <button type="button" class="btn btn-info btn-sm" (click)="clear();getAllMessage();">清空</button>
+        <button type="button" class="btn btn-info btn-sm" (click)="getAllMessage(1, title, courseId);">搜索</button>
+    </div>
 </div>
 
 
 <div class="row">
 
-  <div class="newsCont col-md-7 col-md-offset-2">
-      <div>
-          <h3>消息通知/推送</h3>
-          <hr>
-      </div>
-      <div class="main-cont">
-          <ul class="list">
-              <!-- 循环生成新闻列表 -->
-              <li *ngFor="let msg of msgs$ | async">
-                  <span>{{msg.publishDate}}</span>
-                  <a [routerLink]="['./', msg.messageId]" class="btn btn-link">{{msg.courseName}}: {{msg.title}}</a>
-              </li>
-          </ul>
-      </div>
-  </div>
+    <div class="newsCont col-md-7 col-md-offset-2">
+        <div>
+            <h3>消息通知/推送</h3>
+            <hr>
+        </div>
+        <div class="main-cont">
+            <ul class="list">
+                <!-- 循环生成新闻列表 -->
+                <li *ngFor="let msg of msgs$ | async">
+                    <span>{{msg.publishDate}}</span>
+                    <a [routerLink]="['./', msg.messageId]" class="btn btn-link">{{msg.courseName}}: {{msg.title}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 
 
 
 <div class="main-page row">
-  <nav aria-label="Page navigation">
-      <ul class="pagination" *ngIf="pageInfo$ | async as pageInfo">
-          <!-- 如果存在上一页 -->
-          <li *ngIf="pageInfo.hasPreviousPage" (click)="getAllMessage(1, title, courseId);">
-              <a>
-                  首页
-              </a>
-          </li>
-          <li *ngIf="pageInfo.hasPreviousPage" (click)="getAllMessage(pageInfo.pageNum - 1, title, courseId);">
-              <span>
-                  <span aria-hidden="true">&laquo;</span>
-              </span>
-          </li>
-          <!-- 如果不存在上一页 -->
-          <li *ngIf="!pageInfo.hasPreviousPage" class="disabled">
-              <a>
-                  首页
-              </a>
-          </li>
-          <li *ngIf="!pageInfo.hasPreviousPage" class="disabled">
-              <span>
-                  <span aria-hidden="true">&laquo;</span>
-              </span>
-          </li>
-          <!-- 定义中间页 -->
-          <li *ngFor="let item of pageInfo.navigatepageNums" [class.active]="pageInfo.pageNum === item" (click)="getAllMessage(item, title, courseId)">
-              <a>{{item}}</a>
-          </li>
-          <!-- 如果存在下一页 -->
-          <li *ngIf="pageInfo.hasNextPage" (click)="getAllMessage(pageInfo.pageNum + 1, title, courseId)">
-              <a aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-              </a>
-          </li>
-          <li *ngIf="pageInfo.hasNextPage" (click)="getAllMessage(pageInfo.pages, title, courseId)">
-              <a>
-                  末页
-              </a>
-          </li>
-          <!-- 如果不存在下一页 -->
-          <li *ngIf="!pageInfo.hasNextPage" class="disabled">
-              <a aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-              </a>
-          </li>
-          <li *ngIf="!pageInfo.hasNextPage" class="disabled">
-              <a>
-                  末页
-              </a>
-          </li>
-      </ul>
-  </nav>
+    <nav aria-label="Page navigation">
+        <ul class="pagination" *ngIf="pageInfo$ | async as pageInfo">
+            <!-- 如果存在上一页 -->
+            <li *ngIf="pageInfo.hasPreviousPage" (click)="getAllMessage(1, title, courseId);">
+                <a>
+                    首页
+                </a>
+            </li>
+            <li *ngIf="pageInfo.hasPreviousPage" (click)="getAllMessage(pageInfo.pageNum - 1, title, courseId);">
+                <span>
+                    <span aria-hidden="true">&laquo;</span>
+                </span>
+            </li>
+            <!-- 如果不存在上一页 -->
+            <li *ngIf="!pageInfo.hasPreviousPage" class="disabled">
+                <a>
+                    首页
+                </a>
+            </li>
+            <li *ngIf="!pageInfo.hasPreviousPage" class="disabled">
+                <span>
+                    <span aria-hidden="true">&laquo;</span>
+                </span>
+            </li>
+            <!-- 定义中间页 -->
+            <li *ngFor="let item of pageInfo.navigatepageNums" [class.active]="pageInfo.pageNum === item" (click)="getAllMessage(item, title, courseId)">
+                <a>{{item}}</a>
+            </li>
+            <!-- 如果存在下一页 -->
+            <li *ngIf="pageInfo.hasNextPage" (click)="getAllMessage(pageInfo.pageNum + 1, title, courseId)">
+                <a aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            <li *ngIf="pageInfo.hasNextPage" (click)="getAllMessage(pageInfo.pages, title, courseId)">
+                <a>
+                    末页
+                </a>
+            </li>
+            <!-- 如果不存在下一页 -->
+            <li *ngIf="!pageInfo.hasNextPage" class="disabled">
+                <a aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            <li *ngIf="!pageInfo.hasNextPage" class="disabled">
+                <a>
+                    末页
+                </a>
+            </li>
+        </ul>
+    </nav>
 </div>

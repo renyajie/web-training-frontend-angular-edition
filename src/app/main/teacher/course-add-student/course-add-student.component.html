@@ -1,14 +1,18 @@
-<h3>录入实验课程信息</h3>
-<div class="main-cont">
+<h3>录入课程学生信息</h3>
+<div class="main-cont" *ngIf="courseInfo$">
   <div class="form-group">
     <label for="arrangementId" class="CourseAddStudent-label">课程编号</label>
-    <input type="number" [(ngModel)]="arrangementId" class="CourseAddStudent-input" id="arrangementId" placeholder="课程编号">
+    <select class="CourseAddStudent-input" [(ngModel)]="arrangementId">
+      <option *ngFor="let courseInfo of courseInfo$ | async" value="{{courseInfo.id}}">
+        {{courseInfo.courseDescription}}
+      </option>
+    </select>
   </div>
   <div class="form-group">
     <label for="studentIds" class="CourseAddStudent-label">学号字符串(用'-'连接)</label>
     <input type="text" [(ngModel)]="studentIds" class="CourseAddStudent-input" id="studentIds" placeholder="学号字符串">
   </div>
-</div>
-<div class="main-btn">
-  <button type="button" class="btn btn-primary" (click)="submitData()">提交</button>
+  <div class="main-btn">
+    <button type="button" class="btn btn-primary" (click)="submitData()">提交</button>
+  </div>
 </div>

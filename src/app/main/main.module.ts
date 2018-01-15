@@ -9,6 +9,8 @@ import { LaboratoryModule } from './laboratory/laboratory.module';
 import { NewsModule } from './news/news.module';
 import { ExpDocModule } from './exp-doc/exp-doc.module';
 
+import { CourseService } from '../core/course.service';
+
 import { MainComponent } from './main.component';
 
 @NgModule({
@@ -20,6 +22,9 @@ import { MainComponent } from './main.component';
   ],
   declarations: [
     MainComponent
+  ],
+  providers: [
+    CourseService
   ]
 })
 export class MainModule { 

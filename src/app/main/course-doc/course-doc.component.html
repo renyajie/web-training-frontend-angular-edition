@@ -16,7 +16,11 @@
     </div>
     <div class="col-md-3">
       课程编号：
-      <input [(ngModel)]="courseId">
+      <select [(ngModel)]="courseId" id="courseId">
+          <option *ngFor="let courseInfo of courseInfo$ | async" value="{{courseInfo.id}}">
+              {{courseInfo.courseDescription}}
+          </option>
+      </select>
     </div>
     <div class="col-md-2">
       <button type="button" class="btn btn-info btn-sm clearBtn" (click)="clear();getAllCourseDoc();">清空</button>

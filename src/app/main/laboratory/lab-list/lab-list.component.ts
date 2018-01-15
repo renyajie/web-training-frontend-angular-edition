@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import { of } from 'rxjs/observable/of';
 
 import { LabService } from '../../../core/lab.service';
 import { PersonInfoService } from '../../../core/person-info.service';
 
 import { Laboratory } from '../../../po/laboratory';
-import { Observable } from 'rxjs/Observable';
 
-import 'rxjs/add/operator/map';
-import { of } from 'rxjs/observable/of';
 
 @Component({
   selector: 'app-lab-list',
