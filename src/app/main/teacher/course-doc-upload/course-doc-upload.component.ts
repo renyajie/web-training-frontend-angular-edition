@@ -38,7 +38,7 @@ export class CourseDocUploadComponent implements OnInit {
   submitData() {
     //检查上传文档数据的完备性
     if (this.courseId.length === 0) {
-      alert("实验室名称不能为空");
+      alert("课程编号不能为空");
       return;
     }
     if (!this.uploader.isFile) {
@@ -57,6 +57,7 @@ export class CourseDocUploadComponent implements OnInit {
     });
     //提交数据
     this.uploader.uploadAll();
+    alert("教学文档上传成功");
     this.goToList();
   }
 
@@ -64,7 +65,7 @@ export class CourseDocUploadComponent implements OnInit {
    * 返回教学文档上传页面
    */
   goToList() {
-    this.router.navigate(['main/teacher/add-course']);
+    this.router.navigate(['main/course-doc']);
   }
 
 }

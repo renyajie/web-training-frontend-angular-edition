@@ -47,7 +47,7 @@
         <td>
           <a href="api/courseDoc/download?docId={{courseDoc.docId}}" class="btn btn-info btn-sm">下载</a>
           <button type="button" class="btn btn-info btn-sm">在线预览</button>
-          <button type="button" class="btn btn-info btn-sm">删除</button>
+          <button type="button" class="btn btn-info btn-sm" (click)="deleteCourseDoc(courseDoc.courseDocId)">删除</button>
         </td>
       </tr>
     </table>

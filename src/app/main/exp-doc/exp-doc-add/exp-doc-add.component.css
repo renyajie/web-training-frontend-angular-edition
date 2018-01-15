@@ -1,0 +1,41 @@
+
+.main-cont{
+    margin-top: 20px;
+    margin-left: 25%;
+}
+
+h3{
+    font-weight: bold;
+    text-align: center;
+}
+.form-group .ExpDocInsert-label{
+    width: 100px;
+    margin-top: 10px;
+}
+
+.form-group .ExpDocInsert-input{
+    width: 400px;
+    padding-left: 20px;
+    border: 1px  solid #a8a8a8;
+}
+
+.academy{
+    position:relative;
+    width: 200px;
+    height: 25px;
+    border: 1px  solid #a8a8a8;
+}
+
+.form-control{
+    width: 200px;
+}
+
+.main-btn{
+    margin-top: 20px;
+    margin-left: 35%;    
+}
+
+.main-btn>button:first-child{
+    margin-right: 250px;
+}
+

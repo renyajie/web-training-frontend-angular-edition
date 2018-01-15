@@ -1,5 +1,6 @@
 export class CourseDoc {
     constructor(
+        public courseDocId: number,
         public docId: number,
         public fileName: string,
         public uploadTime: string,
@@ -19,6 +20,7 @@ export class CourseDoc {
     toString() {
         return `
         CourseDoc {
+            courseDocId: ${this.courseDocId},
             docId: ${this.docId},
             fileName: ${this.fileName},
             uploadTime: ${this.uploadTime},

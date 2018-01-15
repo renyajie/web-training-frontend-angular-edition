@@ -24,7 +24,8 @@
 </div>
 
 <div class="main-table">
-  <table class="table-bordered table-hover">
+  <!-- 若当前用户是教师，显示教师对应的表格 -->
+  <table class="table-bordered table-hover" *ngIf="isStudent === false">
     <tr>
       <td class="numberColumn">课程编号</td>
       <td class="nameColumn">课程姓名</td>
@@ -50,6 +51,29 @@
       </td>
     </tr>
   </table>
+  <!-- 若当前用户是学生，显示学生对应的表格 -->
+  <table class="table-bordered table-hover" *ngIf="isStudent === true">
+      <tr>
+        <td class="numberColumn">课程编号</td>
+        <td class="nameColumn">课程姓名</td>
+        <td class="numberColumn">文档编号</td>
+        <td class="dateColumn">文档上传时间</td>
+        <td class="numberColumn">文档大小</td>
+        <td class="title">文档名称</td>
+        <td>操作</td>
+      </tr>
+      <tr *ngFor="let expDoc of expDocs$ | async">
+        <td class="numberColumn">{{expDoc.courseId}}</td>
+        <td class="nameColumn">{{expDoc.courseName}}</td>
+        <td class="numberColumn">{{expDoc.docId}}</td>
+        <td class="dateColumn">{{expDoc.docUploadTime}}</td>
+        <td class="numberColumn">{{expDoc.docSize}}KB</td>
+        <td class="docName">{{expDoc.docName}}</td>
+        <td>
+          <a href="api/exp/download?docId={{expDoc.docId}}" class="btn btn-info btn-sm">下载</a>
+        </td>
+      </tr>
+    </table>
 </div>
 
 <div class="row foot-content">

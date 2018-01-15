@@ -37,7 +37,7 @@ export class CourseDocComponent implements OnInit {
   minDate: Date;
   courseId: string = '';
 
-  constructor(private CourseDocService: CourseDocService) {
+  constructor(private courseDocService: CourseDocService) {
     //用到的参数一定要初始化，你无法预知你会什么时候调用它。
     this.beforeDate = new Date();
     this.afterDate = new Date();
@@ -110,7 +110,7 @@ export class CourseDocComponent implements OnInit {
     }
     //发出搜索，并展示结果 TODO
     const courseDocs: CourseDoc[] = [];
-    this.CourseDocService.getAllCourseDoc(
+    this.courseDocService.getAllCourseDoc(
       pn, courseId,
       this.firstChooseForBeforeDate ? null : DateFormat.formatWithDay(this.beforeDate),
       this.firstChooseForAfterDate ? null : DateFormat.formatWithDay(this.afterDate)).subscribe(
@@ -129,6 +129,26 @@ export class CourseDocComponent implements OnInit {
         }
       }
       );
+  }
+
+  /**
+   * 根据编号删除教学文档
+   * @param id 教学文档编号
+   */
+  deleteCourseDoc(id) {
+    this.courseDocService.deleteCourseDoc(id).subscribe(
+      data => {
+        //若服务器操作成功，提示用户并重新加载列表
+        if(data['code'] === 100) {
+          alert("教学文档删除成功");
+          this.getAllCourseDoc();
+        }
+        //若服务器删除失败
+        else {
+          alert("教学文档删除失败");
+        }
+      }
+    )
   }
 
 }

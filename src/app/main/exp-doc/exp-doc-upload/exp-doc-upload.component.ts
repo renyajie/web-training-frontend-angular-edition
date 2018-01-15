@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import { of } from 'rxjs/observable/of';
 
 import { ExpDocService } from '../../../core/exp-doc.service';
+import { PersonInfoService } from '../../../core/person-info.service';
 
 import { DateFormat } from '../../../utility/date-format';
 import { ExpDoc } from '../../../po/exp-doc';
@@ -16,6 +17,8 @@ import { ExpDoc } from '../../../po/exp-doc';
   styleUrls: ['./exp-doc-upload.component.css']
 })
 export class ExpDocUploadComponent implements OnInit {
+
+  isStudent: boolean;
 
   pageInfo$: Observable<any>;
   expDocs$: Observable<ExpDoc[]>;
@@ -38,7 +41,10 @@ export class ExpDocUploadComponent implements OnInit {
   minDate: Date;
   courseId: string = '';
 
-  constructor(private expDocService: ExpDocService) { 
+  constructor(
+    private expDocService: ExpDocService,
+    private personInfoService: PersonInfoService) {
+    this.isStudent = this.personInfoService.isStudent;
     //用到的参数一定要初始化，你无法预知你会什么时候调用它。
     this.beforeDate = new Date();
     this.afterDate = new Date();
@@ -103,7 +109,7 @@ export class ExpDocUploadComponent implements OnInit {
    */
   getAllExpDoc(pn?, courseId?) {
     //判断日期选择的合理性
-    if(!this.firstChooseForBeforeDate && !this.firstChooseForAfterDate) {
+    if (!this.firstChooseForBeforeDate && !this.firstChooseForAfterDate) {
       if (this.beforeDate.getDate() > this.afterDate.getDate()) {
         alert("最早日期不能晚于最迟日期，请重新选择");
         this.clear();

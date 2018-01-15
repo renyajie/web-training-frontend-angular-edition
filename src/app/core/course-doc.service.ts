@@ -67,4 +67,15 @@ export class CourseDocService {
     }
     return this.httpClient.get(testUrl, { params });
   }
+
+  /**
+   * 删除教学文档记录
+   * @param id 教学文档编号 
+   */
+  deleteCourseDoc(id) {
+    const params = new HttpParams()
+    .set('ids', id);
+    const testUrl = this.url + 'delete';
+    return this.httpClient.delete(testUrl, { params });
+  }
 }
