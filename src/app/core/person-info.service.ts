@@ -19,7 +19,7 @@ export class PersonInfoService {
   constructor(private httpClient: HttpClient) { 
     //TODO: 测试信息，测试教师编号为1的用户
     this.account = 1;
-    this.isStudent = false;
+    this.isStudent = true;
   }
 
   set account(account: number) {

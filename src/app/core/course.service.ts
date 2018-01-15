@@ -53,6 +53,19 @@ export class CourseService {
   }
 
   /**
+   * 录入学生课程信息
+   * @param arrangementId 课程编号
+   * @param studentIds 学生编号
+   */
+  courseAddCourse(arrangementId, studentIds) {
+    const testUrl = this.url + 'addStudentInCourse';
+    return this.httpClient.post(testUrl, {
+      'arrangementId': arrangementId,
+      'studentIds': studentIds
+    });
+  }
+
+  /**
    * 计算课表中间数据CourseAux,用于生成课程表
    * @param courseResults 服务器查询到的课程信息
    */
