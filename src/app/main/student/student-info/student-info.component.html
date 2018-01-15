@@ -1,0 +1,45 @@
+<h3>教师个人信息</h3>
+<div class="main-cont" *ngIf="student$ | async as student">
+  <div class="form-group">
+    <label for="id" class="StudentUpdate-label">学号</label>
+    <input type="text" [(ngModel)]="student.stuId" class="StudentUpdate-input" id="id" placeholder="学号" readonly="true">
+  </div>
+  <div class="form-group">
+    <label for="name" class="StudentUpdate-label">姓名</label>
+    <input type="text" [(ngModel)]="student.stuName" class="StudentUpdate-input" id="name" placeholder="姓名">
+  </div>
+  <div class="form-group">
+    <label for="passwd" class="StudentUpdate-label">密码</label>
+    <input type="text" [(ngModel)]="student.passwd" class="StudentUpdate-input" id="passwd" placeholder="密码">
+  </div>
+  <div class="form-group">
+    <label for="phone" class="StudentUpdate-label">手机</label>
+    <input type="text" [(ngModel)]="student.phone" class="StudentUpdate-input" id="phone" placeholder="手机号码">
+  </div>
+  <div class="form-group">
+    <label for="classInfo" class="StudentUpdate-label">班级信息</label>
+    <input type="text" [(ngModel)]="student.classInfo" class="StudentUpdate-input" id="classInfo" placeholder="班级信息">
+  </div>
+  <div class="form-group">
+    <label for="gender" class="StudentUpdate-label">性别</label>
+    <input type="text" [(ngModel)]="student.gender" class="StudentUpdate-input" id="gender" placeholder="性别">
+  </div>
+  <div class="form-group">
+    <button type="button" class="btn btn-info btn-sm " (click)="showBirthPicker(null)">{{birthBtnText}}</button>
+    <span class="chooseDeadlineText">{{birthText}}</span>
+    <br>
+    <datepicker *ngIf="showBirth" [(ngModel)]="birth" [showWeeks]="true" (onChange)="showBirthPicker($event)" [minDate]="minDate"
+      [maxDate]="maxDate"></datepicker>
+  </div>
+  <div class="form-group">
+    <label for="email" class="StudentUpdate-label">邮箱</label>
+    <input type="email" [(ngModel)]="student.email" class="StudentUpdate-input" id="email" placeholder="邮箱">
+  </div>
+  <div class="form-group">
+    <label for="major" class="StudentUpdate-label">专业</label>
+    <input type="text" [(ngModel)]="student.major" class="StudentUpdate-input" id="major" placeholder="专业">
+  </div>
+  <div class="main-btn">
+    <button type="button" class="btn btn-primary" (click)="submitData(student)">提交</button>
+  </div>
+</div>

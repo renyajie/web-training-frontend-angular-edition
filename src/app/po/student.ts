@@ -6,7 +6,7 @@ export class Student {
         public phone?: string,
         public classInfo?: string,
         public gender?: string,
-        public birth?: Date,
+        public birth?: string,
         public major?: String,
         public email?: String
     ) {}

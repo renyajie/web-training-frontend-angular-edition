@@ -47,7 +47,8 @@
         <td>
           <a href="api/courseDoc/download?docId={{courseDoc.docId}}" class="btn btn-info btn-sm">下载</a>
           <button type="button" class="btn btn-info btn-sm">在线预览</button>
-          <button type="button" class="btn btn-info btn-sm" (click)="deleteCourseDoc(courseDoc.courseDocId)">删除</button>
+          <!-- 若当前用户是教师，显示删除按钮，否则不显示删除按钮 -->
+          <button type="button" class="btn btn-info btn-sm" (click)="deleteCourseDoc(courseDoc.courseDocId)" *ngIf="isStudent === false">删除</button>
         </td>
       </tr>
     </table>

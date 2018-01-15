@@ -17,6 +17,7 @@ const mainRoutes: Routes = [
       { path: 'exp-doc', loadChildren: 'app/main/exp-doc/exp-doc.module#ExpDocModule' },
       { path: 'course-doc', loadChildren: 'app/main/course-doc/course-doc.module#CourseDocModule' },
       { path: 'teacher', loadChildren: 'app/main/teacher/teacher.module#TeacherModule' },
+      { path: 'student', loadChildren: 'app/main/student/student.module#StudentModule' },
       { path: 'welcome', component: WelcomeComponent },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
       { path: '**', component: PageNotFoundComponent }

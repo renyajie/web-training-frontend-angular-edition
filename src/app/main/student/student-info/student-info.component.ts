@@ -6,16 +6,16 @@ import { of } from 'rxjs/observable/of';
 import { PersonInfoService } from '../../../core/person-info.service';
 
 import { DateFormat } from '../../../utility/date-format';
-import { Teacher } from '../../../po/teacher';
+import { Student } from '../../../po/student';
 
 @Component({
-  selector: 'app-teacher-info',
-  templateUrl: './teacher-info.component.html',
-  styleUrls: ['./teacher-info.component.css']
+  selector: 'app-student-info',
+  templateUrl: './student-info.component.html',
+  styleUrls: ['./student-info.component.css']
 })
-export class TeacherInfoComponent implements OnInit {
+export class StudentInfoComponent implements OnInit {
 
-  teacher$: Observable<Teacher>;
+  student$: Observable<Student>;
 
   private _birthText = '';
   //判断用户是否尚未选择生日
@@ -43,20 +43,20 @@ export class TeacherInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    let teacher: Teacher;
+    let student: Student;
     this.personInfoService.getPersonInfo().subscribe(
       data => {
         //若服务器成功返回信息
         if(data['code'] === 100) {
-          teacher = Teacher.fromJSON(data['extend']['info']);
-          console.log(teacher);
+          student = Student.fromJSON(data['extend']['info']);
+          console.log(student);
           //若未选择生日
-          if(teacher.birth == null || teacher.birth.length == 0) {
+          if(student.birth == null || student.birth.length == 0) {
             this.birthText = '未选择生日';
           }else {
-            this.birthText = teacher.birth;
+            this.birthText = student.birth;
           }
-          this.teacher$ = of(teacher);
+          this.student$ = of(student);
         }
         //若发生错误
         else {
@@ -65,7 +65,6 @@ export class TeacherInfoComponent implements OnInit {
       }
     )
   }
-
 
   showBirthPicker(event: any) {
     if(this.birthUntouched === true) {
@@ -88,42 +87,38 @@ export class TeacherInfoComponent implements OnInit {
     this._birthText = text;
   }
 
-  submitData(teacher: Teacher){
+  submitData(student: Student){
     //检查数据的完备性
-    if(teacher.teacherName == null || teacher.teacherName.length == 0) {
-      alert("教师姓名不能为空");
+    if(student.stuName == null || student.stuName.length == 0) {
+      alert("姓名不能为空");
       return;
     }
-    if(teacher.passwd == null || teacher.passwd.length == 0) {
+    if(student.passwd == null || student.passwd.length == 0) {
       alert("密码不能为空");
       return;
     }
-    if(teacher.phone == null || teacher.phone.length == 0) {
+    if(student.phone == null || student.phone.length == 0) {
       alert("手机号码不能为空");
       return;
     }
-    if(teacher.job == null || teacher.job.length == 0) {
-      alert("通知的标题不能为空");
+    if(student.classInfo == null || student.classInfo.length == 0) {
+      alert("班级不能为空");
       return;
     }
-    if(teacher.gender == null || teacher.gender.length == 0) {
+    if(student.gender == null || student.gender.length == 0) {
       alert("性别不能为空");
       return;
     }
-    if(teacher.office == null || teacher.office.length == 0) {
-      alert("办公室不能为空");
-      return;
-    }
-    if(teacher.major == null || teacher.major.length == 0) {
+    if(student.major == null || student.major.length == 0) {
       alert("专业不能为空");
       return;
     }
     //若用户选择了生日，则更新教师生日
     if(this.birthText != '未选择生日') {
-      teacher.birth = this.birthText;
+      student.birth = this.birthText;
     }
     //提交数据
-    this.personInfoService.updateTeacherInfo(teacher).subscribe(
+    this.personInfoService.updateStudentInfo(student).subscribe(
       data => {
         if(data['code'] === 100) {
           alert("提交成功");
@@ -131,7 +126,7 @@ export class TeacherInfoComponent implements OnInit {
         else{
           //提示服务器返回的错误信息
           let errorFields = data['extend']['errorFields'];
-          let fields: string[] = ['teacherName', 'passwd', 'phone', 'job', 'gender', 'email', 'office', 'major'];
+          let fields: string[] = ['stuName', 'passwd', 'phone', 'classInfo', 'gender', 'major'];
           fields.map(key => {
             if(errorFields[key]) {
               alert("服务器校验信息: " + errorFields[key]);

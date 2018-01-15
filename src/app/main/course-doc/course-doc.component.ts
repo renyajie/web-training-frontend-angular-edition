@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import { of } from 'rxjs/observable/of';
 
 import { CourseDocService } from '../../core/course-doc.service';
+import { PersonInfoService } from '../../core/person-info.service';
 
 import { DateFormat } from '../../utility/date-format';
 import { CourseDoc } from '../../po/course-doc';
@@ -16,6 +17,7 @@ import { CourseDoc } from '../../po/course-doc';
   styleUrls: ['./course-doc.component.css']
 })
 export class CourseDocComponent implements OnInit {
+  isStudent: boolean;
   pageInfo$: Observable<any>;
   courseDocs$: Observable<CourseDoc[]>;
 
@@ -37,7 +39,10 @@ export class CourseDocComponent implements OnInit {
   minDate: Date;
   courseId: string = '';
 
-  constructor(private courseDocService: CourseDocService) {
+  constructor(
+    private courseDocService: CourseDocService,
+    private personInfoService: PersonInfoService) {
+    this.isStudent = this.personInfoService.isStudent;
     //用到的参数一定要初始化，你无法预知你会什么时候调用它。
     this.beforeDate = new Date();
     this.afterDate = new Date();

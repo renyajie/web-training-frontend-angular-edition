@@ -29,7 +29,7 @@ export class CourseService {
     let testUrl = '';
     if (isStudent) {
       personIdName = 'studentId';
-      testUrl = this.url + 'getForTeacher';
+      testUrl = this.url + 'getForStudent';
     } else {
       personIdName = 'teacherId';
       testUrl = this.url + 'getForTeacher';
