@@ -6,7 +6,7 @@ import 'rxjs/add/operator/switchMap';
 
 import { ExpDocReqService } from '../../../core/exp-doc-req.service';
 
-import { ExpDocReq } from '../../../po/exp-doc-req';
+import { ExpDocReqForTeacher } from '../../../po/exp-doc-req-teacher';
 
 @Component({
   selector: 'app-exp-doc-req-detail',
@@ -15,7 +15,7 @@ import { ExpDocReq } from '../../../po/exp-doc-req';
 })
 export class ExpDocReqDetailComponent implements OnInit {
 
-  req$: Observable<ExpDocReq>;
+  req$: Observable<ExpDocReqForTeacher>;
 
   constructor(
     private expDocService: ExpDocReqService,

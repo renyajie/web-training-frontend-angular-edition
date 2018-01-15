@@ -5,7 +5,7 @@ import { DatepickerModule } from 'ngx-bootstrap';
 import { ExpDocReqService } from '../../../core/exp-doc-req.service';
 import { PersonInfoService } from '../../../core/person-info.service';
 
-import { ExpDocReq } from '../../../po/exp-doc-req';
+import { ExpDocReqForTeacher } from '../../../po/exp-doc-req-teacher';
 import { DateFormat } from '../../../utility/date-format';
 
 @Component({
@@ -15,7 +15,7 @@ import { DateFormat } from '../../../utility/date-format';
 })
 export class ExpDocReqInsertComponent implements OnInit {
 
-  expDocReq: ExpDocReq;
+  expDocReq: ExpDocReqForTeacher;
 
   //日期选择框文本
   deadlineBtnText = '选择截止日期';
@@ -34,7 +34,7 @@ export class ExpDocReqInsertComponent implements OnInit {
     private expDocService: ExpDocReqService,
     private personService: PersonInfoService
   ) { 
-    this.expDocReq = new ExpDocReq(null, null, null, null, null, null, null);
+    this.expDocReq = new ExpDocReqForTeacher(null, null, null, null, null, null, null);
     this.expDocReq.teacherId = this.personService.account;
     this.deadline = new Date();
     this.minDate = new Date();

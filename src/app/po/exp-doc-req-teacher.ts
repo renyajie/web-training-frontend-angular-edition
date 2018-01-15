@@ -1,4 +1,4 @@
-export class ExpDocReq {
+export class ExpDocReqForTeacher {
     constructor(
         public id: number,
         public teacherId: number,
@@ -9,15 +9,15 @@ export class ExpDocReq {
         public info: string
     ) {}
 
-    static fromJSON(json: any): ExpDocReq {
-        const expDocReq = Object.create(ExpDocReq.prototype);
+    static fromJSON(json: any): ExpDocReqForTeacher {
+        const expDocReq = Object.create(ExpDocReqForTeacher.prototype);
         Object.assign(expDocReq, json);
         return expDocReq;
     }
 
     toString() {
         return `
-        ExpDocReq {
+        ExpDocReqForTeacher {
             id: ${this.id},
             teacherId: ${this.teacherId},
             courseId: ${this.courseId},

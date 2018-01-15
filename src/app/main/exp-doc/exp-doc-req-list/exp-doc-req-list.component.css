@@ -57,12 +57,17 @@ td{
     margin-right: 30px;
 }
 
+/* 不同数据类型的表格列宽 */
 .numberColumn{
     width: 100px;
 }
 
 .dateColumn {
     width: 150px;
+}
+
+.nameColumn {
+    width: 100px;
 }
 
 .title {

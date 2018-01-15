@@ -7,10 +7,15 @@ import 'rxjs/add/operator/map';
 import { of } from 'rxjs/observable/of';
 
 import { ExpDocReqService } from '../../../core/exp-doc-req.service';
+import { PersonInfoService } from '../../../core/person-info.service';
 
 import { DateFormat } from '../../../utility/date-format';
-import { ExpDocReq } from '../../../po/exp-doc-req';
+import { ExpDocReqForTeacher } from '../../../po/exp-doc-req-teacher';
+import { ExpDocReqForStudent } from '../../../po/exp-doc-req-student';
 
+/**
+ * 实验报告要求列表页面，这个页面比较特殊，为了代码复用，涉及到两种布局，需要根据当前用户的身份进行选择
+ */
 @Component({
   selector: 'app-exp-doc-req-list',
   templateUrl: './exp-doc-req-list.component.html',
@@ -18,8 +23,10 @@ import { ExpDocReq } from '../../../po/exp-doc-req';
 })
 export class ExpDocReqListComponent implements OnInit {
 
+  isStudent: boolean;
+
   pageInfo$: Observable<any>;
-  reqs$: Observable<ExpDocReq[]>;
+  reqs$: Observable<any>;
 
   //日期选择框文本
   beforeBtnText = '选择最早日期';
@@ -43,7 +50,10 @@ export class ExpDocReqListComponent implements OnInit {
 
   constructor(
     private exDocReqService: ExpDocReqService,
+    private personInfoService: PersonInfoService,
     private router: Router) { 
+    //获取当前用户的身份，以便复用布局，显示不同内容
+    this.isStudent = this.personInfoService.isStudent;
     //用到的参数一定要初始化，你无法预知你会什么时候调用它。
     this.beforeDate = new Date();
     this.afterDate = new Date();
@@ -116,7 +126,7 @@ export class ExpDocReqListComponent implements OnInit {
       }
     }
     //发出搜索，并展示结果 TODO
-    const reqs: ExpDocReq[] = [];
+    const reqs = [];
     this.exDocReqService.getAllRequirement(
       pn, title, courseId,
       this.firstChooseForBeforeDate ? null : DateFormat.formatWithDay(this.beforeDate),
@@ -125,10 +135,15 @@ export class ExpDocReqListComponent implements OnInit {
         //若成功返回数据，为元素赋值
         if (data['code'] === 100) {
           data['extend']['pageInfo']['list'].map(req => {
-            reqs.push(ExpDocReq.fromJSON(req));
+            if(this.isStudent) {
+              reqs.push(ExpDocReqForStudent.fromJSON(req));
+            }
+            else {
+              reqs.push(ExpDocReqForTeacher.fromJSON(req));
+            }
           });
           this.reqs$ = of(reqs);
-          this.pageInfo$ = of(data['extend']['pageInfo'])
+          this.pageInfo$ = of(data['extend']['pageInfo']);
         }
         //若发生错误
         else {

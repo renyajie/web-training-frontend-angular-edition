@@ -11,6 +11,7 @@ const expDocRoutes: Routes = [
       { path: 'list', loadChildren: 'app/main/exp-doc/exp-doc-req-list/exp-doc-req-list.module#ExpDocReqListModule'},
       { path: 'insert', loadChildren: 'app/main/exp-doc/exp-doc-req-insert/exp-doc-req-insert.module#ExpDocReqInsertModule'},
       { path: 'upload', loadChildren: 'app/main/exp-doc/exp-doc-upload/exp-doc-upload.module#ExpDocUploadModule'},
+      { path: 'add', loadChildren: 'app/main/exp-doc/exp-doc-add/exp-doc-add.module#ExpDocAddModule'},
       { path: '', redirectTo: 'list', pathMatch: 'full' }
     ]
   }
