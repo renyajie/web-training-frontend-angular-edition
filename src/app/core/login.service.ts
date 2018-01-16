@@ -33,4 +33,26 @@ export class LoginService {
     return this.httpClient.post(testUrl, student);
   }
 
+  /**
+   * 教师注册
+   * @param teacher 教师信息
+   */
+  teacherRegister(teacher: Teacher) {
+    let tmp: Teacher = new Teacher(null, null);
+    tmp = Object.assign(tmp, teacher);
+    const testUrl = this.url + 'teacherRegister';
+    return this.httpClient.post(testUrl, tmp);
+  }
+
+  /**
+   * 学生注册
+   * @param student 学生 
+   */
+  studentRegister(student: Student) {
+    let tmp: Student = new Student(null, null);
+    tmp = Object.assign(tmp, student);
+    const testUrl = this.url + 'studentRegister';
+    return this.httpClient.post(testUrl, tmp);
+  }
+
 }

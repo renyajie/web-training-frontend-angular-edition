@@ -1,0 +1,114 @@
+<div class="row header">
+  <div class="col-md-12">
+    <h1 class="title">
+      实验教学中心欢迎您
+    </h1>
+  </div>
+</div>
+<div class="row main-body">
+  <div class="main-rd">
+    <label class="radio-inline">
+      <input type="radio" name="isStudentRegister" [checked]="isStudentRegister === 0" (click)="isStudentRegister=0"> 教师</label>
+    <label class="radio-inline">
+      <input type="radio" name="isStudentRegister" [checked]="isStudentRegister === 1" (click)="isStudentRegister=1"> 学生</label>
+  </div>
+  <div class="col-md-12">
+    <!-- 学生注册界面 -->
+    <div class="total" *ngIf="isStudentRegister === 1">
+      <h3>学生注册</h3>
+      <div class="go-center">
+        TODO: {{diagnosticForStudent}}
+      </div>
+      <div class="main-lg">
+        <div class="lg-name">
+          <label>姓名</label>
+          <input type="text" [(ngModel)]="student.stuName" placeholder="姓名">
+        </div>
+
+        <div class="lg-pw">
+          <label>密码</label>
+          <input type="password" [(ngModel)]="student.passwd" placeholder="密码">
+        </div>
+
+        <div class="lg-name">
+          <label>手机</label>
+          <input type="number" [(ngModel)]="student.phone" placeholder="手机">
+        </div>
+
+        <div class="lg-name">
+          <label>班级</label>
+          <input type="text" [(ngModel)]="student.classInfo" placeholder="班级">
+        </div>
+        <div class="main-rd">
+          <label class="radio-inline">
+            <input type="radio" name="isStudent" [checked]="student.gender === '男'" (click)="student.gender = '男'">男</label>
+          <label class="radio-inline">
+            <input type="radio" name="isStudent" [checked]="student.gender === '女'" (click)="student.gender = '女'">女</label>
+        </div>
+        <div class="lg-name">
+          <label>专业</label>
+          <input type="email" [(ngModel)]="student.major" placeholder="专业">
+        </div>
+      </div>
+      <div class="main-btn">
+        <button type="button" class="btn btn-info" (click)="submitData()">提交</button>
+        <button type="button" class="btn btn-info" (click)="goToLogin()">返回</button>
+      </div>
+    </div>
+    <!-- 教师注册界面 -->
+    <div class="total" *ngIf="isStudentRegister === 0">
+      <h3>教师注册</h3>
+      <div class="go-center">
+        TODO: {{diagnosticForTeacher}}
+      </div>
+
+      <div class="main-lg">
+        <div class="lg-name">
+          <label>姓名</label>
+          <input type="text" [(ngModel)]="teacher.teacherName" placeholder="姓名">
+        </div>
+
+        <div class="lg-pw">
+          <label>密码</label>
+          <input type="password" [(ngModel)]="teacher.passwd" placeholder="密码">
+        </div>
+
+        <div class="lg-name">
+          <label>手机</label>
+          <input type="number" [(ngModel)]="teacher.phone" placeholder="手机">
+        </div>
+
+        <div class="lg-name">
+          <label>职称</label>
+          <input type="text" [(ngModel)]="teacher.job" placeholder="职称">
+        </div>
+        <div class="main-rd">
+          <label class="radio-inline">
+            <input type="radio" name="isTeacher" [checked]="teacher.gender === '男'" (click)="teacher.gender = '男'">男</label>
+          <label class="radio-inline">
+            <input type="radio" name="isTeacher" [checked]="teacher.gender === '女'" (click)="teacher.gender = '女'">女</label>
+        </div>
+        <div class="lg-name">
+          <label>办公室</label>
+          <input type="text" [(ngModel)]="teacher.office" placeholder="办公室">
+        </div>
+        <div class="lg-name">
+          <label>专业</label>
+          <input type="text" [(ngModel)]="teacher.major" placeholder="专业">
+        </div>
+      </div>
+      <div class="main-btn">
+        <button type="button" class="btn btn-info" (click)="submitData()">提交</button>
+        <button type="button" class="btn btn-info" (click)="goToLogin()">返回</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row footer colorOne">
+  <div class="col-md-12">
+    <div class="team">
+      任亚捷组
+    </div>
+  </div>
+</div>

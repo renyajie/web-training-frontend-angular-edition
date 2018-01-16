@@ -7,6 +7,8 @@ import { StartRoutingModule } from './start-routing.module';
 import { LoginService } from '../core/login.service';
 
 import { StartComponent} from './start.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   imports: [
@@ -15,7 +17,9 @@ import { StartComponent} from './start.component';
     StartRoutingModule
   ],
   declarations: [
-    StartComponent
+    StartComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   providers: [
     LoginService
