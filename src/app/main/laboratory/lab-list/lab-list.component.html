@@ -11,8 +11,11 @@
     <div class="labImg">
       <img src={{lab.imgPath}}>
     </div>
-    <div class="labTxt">
-      <p>{{lab.brief}}</p>
+    <div class="labTitle">
+      名称: {{lab.labName}}
+    </div>
+    <div class="labBrief">
+      简介: {{lab.brief}}
     </div>
     <div class="labBtn">
       <a [routerLink]="['./', lab.id]" class="btn btn-info btn-sm">点击查看详情</a>

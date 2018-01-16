@@ -21,9 +21,16 @@ export class LabService {
     let params = new HttpParams()
       .set('pn', pageNumber ? pageNumber : '')
       .set('labName', labName ? labName : '');
-    console.log(`pageNumber is ${pageNumber}, labName is ${labName}`);
     const testUrl = this.url + 'getAll';
     return this.httpClient.get(testUrl, { params });
+  }
+
+  /**
+   * 获取所有实验室的基本信息
+   */
+  getAllLabBaseInfo() {
+    const testUrl = this.url + 'getAllLabBaseInfo';
+    return this.httpClient.get(testUrl);
   }
 
   /**

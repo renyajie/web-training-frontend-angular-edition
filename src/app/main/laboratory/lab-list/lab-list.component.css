@@ -27,13 +27,14 @@
     height: 100px;
 }
 
-.labTxt{
+.labTitle{
     padding: 5px;
     margin-top: 10px;
 }
 
-.labTxt p{
-    text-indent: 2em;
+.labBrief{
+    padding: 5px;
+    margin-top: 4px;
 }
 
 .labBtn{

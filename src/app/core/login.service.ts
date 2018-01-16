@@ -4,6 +4,9 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Teacher } from '../po/teacher';
 import { Student } from '../po/student';
 
+/**
+ * 处理登录，注册，更新
+ */
 @Injectable()
 export class LoginService {
 

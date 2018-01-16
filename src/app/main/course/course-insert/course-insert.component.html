@@ -1,6 +1,6 @@
 <h3>新增课程安排</h3>
 TODO {{diagnostic}}
-<div class="main-cont" *ngIf="courseInfo$">
+<div class="main-cont" *ngIf="courseInfo$ && labs$">
     <div class="form-group">
         <label for="courseId" class="MessageInsert-label">课程编号</label>
         <select class="MessageInsert-input" [(ngModel)]="course.courseId" id="courseId">
@@ -11,30 +11,52 @@ TODO {{diagnostic}}
     </div>
     <div class="form-group">
         <label for="startCourseTime" class="MessageInsert-label">课程开始时间</label>
-        <input type="number" [(ngModel)]="course.startCourseTime" class="MessageInsert-input" id="startCourseTime" placeholder="课程开始时间">
+        <select class="MessageInsert-input" [(ngModel)]="course.startCourseTime" id="startCourseTime">
+            <option *ngFor="let courseTime of courseTimes" value="{{courseTime.value}}">
+                {{courseTime.description}}
+            </option>
+        </select>
     </div>
     <div class="form-group">
         <label for="endCourseTime" class="MessageInsert-label">课程结束时间</label>
-        <input type="number" [(ngModel)]="course.endCourseTime" class="MessageInsert-input" id="endCourseTime" placeholder="课程结束时间">
+        <select class="MessageInsert-input" [(ngModel)]="course.endCourseTime" id="endCourseTime">
+            <option *ngFor="let courseTime of courseTimes" value="{{courseTime.value}}">
+                {{courseTime.description}}
+            </option>
+        </select>
     </div>
     <div class="form-group">
         <label for="weekday" class="MessageInsert-label">周几上课</label>
-        <input type="number" [(ngModel)]="course.weekday" class="MessageInsert-input" id="weekday" placeholder="上课日期">
+        <select class="MessageInsert-input" [(ngModel)]="course.weekday" id="weekday">
+            <option *ngFor="let weekDay of weekDays" value="{{weekDay.value}}">
+                {{weekDay.description}}
+            </option>
+        </select>
     </div>
     <div class="form-group">
         <label for="startWeek" class="MessageInsert-label">开始周数</label>
-        <input type="number" [(ngModel)]="course.startWeek" class="MessageInsert-input" id="startWeek" placeholder="开始周数">
+        <select class="MessageInsert-input" [(ngModel)]="course.startWeek" id="startWeek">
+            <option *ngFor="let week of weeks" value="{{week.value}}">
+                {{week.description}}
+            </option>
+        </select>
     </div>
     <div class="form-group">
         <label for="endWeek" class="MessageInsert-label">结束周数</label>
-        <input type="number" [(ngModel)]="course.endWeek" class="MessageInsert-input" id="endWeek" placeholder="结束周数">
+        <select class="MessageInsert-input" [(ngModel)]="course.endWeek" id="endWeek">
+            <option *ngFor="let week of weeks" value="{{week.value}}">
+                {{week.description}}
+            </option>
+        </select>
     </div>
     <div class="form-group">
         <label for="labId" class="MessageInsert-label">实验室编号</label>
-        <input type="number" [(ngModel)]="course.labId" class="MessageInsert-input" id="labId" placeholder="实验室编号">
+        <select class="MessageInsert-input" [(ngModel)]="course.labId" id="labId">
+            <option *ngFor="let lab of labs$ | async" value="{{lab.id}}">
+                {{lab.labName}}
+            </option>
+        </select>
     </div>
-
-
 </div>
 <div class="main-btn">
     <button type="button" class="btn btn-primary" (click)="submitData()">提交</button>

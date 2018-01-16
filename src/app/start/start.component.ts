@@ -16,7 +16,6 @@ export class StartComponent implements OnInit {
   isStudent: number;
   account: string;
   passwd: string;
-  debugMessage = '';
 
   constructor(
     public router: Router, 
@@ -25,13 +24,14 @@ export class StartComponent implements OnInit {
     this.isStudent = 1;
   }
 
+  get diagnostic() { return JSON.stringify('account: ' + this.account +', passwd: ' + this.passwd); }
+
   ngOnInit() {
     
   }
 
   //登录方法
   login() {
-    this.debugMessage = `account: ${this.account}, password: ${this.passwd}`;
     //判断账号密码是否为空
     if(this.account == null || this.account.length == 0){
       alert("账号不能为空");
@@ -59,7 +59,7 @@ export class StartComponent implements OnInit {
           }
         }
       )
-    }else{
+    }else {
       this.loginService.teacherLogin({ teacherId: +this.account, passwd: this.passwd } as Teacher)
       .subscribe(
         data => {

@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { CourseInsertRoutingModule } from './course-insert-routing.module';
 
+import { LabService } from '../../../core/lab.service';
+
 import { CourseInsertComponent } from './course-insert.component';
 
 @NgModule({
@@ -14,6 +16,9 @@ import { CourseInsertComponent } from './course-insert.component';
   ],
   declarations: [
     CourseInsertComponent
+  ],
+  providers: [
+    LabService
   ]
 })
 export class CourseInsertModule { }
