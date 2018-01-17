@@ -108,6 +108,7 @@ export class NewsListComponent implements OnInit {
       if (this.beforeDate.getDate() > this.afterDate.getDate()) {
         alert("最早日期不能晚于最迟日期，请重新选择");
         this.clear();
+        return;
       }
     }
     //发出搜索，并展示结果 TODO
