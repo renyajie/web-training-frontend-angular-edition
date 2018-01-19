@@ -71,9 +71,12 @@ export class RegisterComponent implements OnInit {
           }
           else {
             //提示服务器返回的错误信息
+            let notices: string[] = ['stuName', 'passwd', 'phone', 'classInfo', 'gender', 'major'];
             const errorFields = data['extend']['errorFields'];
-            for (let msg of errorFields) {
-              alert("服务器校验信息: " + msg);
+            for (let notice of notices) {
+              if(errorFields[notice] != null) {
+                alert(errorFields[notice]);
+              }
             }
           }
         }
